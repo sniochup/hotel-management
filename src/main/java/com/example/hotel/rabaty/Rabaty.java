@@ -55,7 +55,7 @@ public class Rabaty {
         return id_rabatu;
     }
 
-    public void setId_rabatu() {
+    public void setId_rabatu(Long id_rabatu) {
         this.id_rabatu = id_rabatu;
     }
 
@@ -63,7 +63,7 @@ public class Rabaty {
         return wysokosc_rabatu;
     }
 
-    public void setWysokosc_rabatu() {
+    public void setWysokosc_rabatu(Float wysokosc_rabatu) {
         this.wysokosc_rabatu = wysokosc_rabatu;
     }
 
@@ -71,7 +71,7 @@ public class Rabaty {
         return typ;
     }
 
-    public void setTyp() {
+    public void setTyp(String typ) {
         this.typ = typ;
     }
 
