@@ -80,7 +80,6 @@ public class Rezerwacje {
         this.status = status;
         this.platnosc = platnosc;
         this.status_platnosci = status_platnosci;
-        this.klient = klient;
     }
 
     public Rezerwacje() {
@@ -155,4 +154,5 @@ public class Rezerwacje {
                 ", id klienta=" + klient +
                 '}';
     }
+
 }
