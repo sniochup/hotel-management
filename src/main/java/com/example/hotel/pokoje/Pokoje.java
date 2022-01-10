@@ -3,7 +3,6 @@ package com.example.hotel.pokoje;
 import com.example.hotel.typy_pokojow.Typy_pokojow;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 
 @Entity(name = "Pokoje")
 @Table(
@@ -65,15 +64,13 @@ public class Pokoje {
         public Pokoje(Integer cena,
                       Integer liczba_osob,
                       Integer metraz,
-                      Boolean czy_dostepny,
-                      Typy_pokojow typ_pokoju) {
+                      Boolean czy_dostepny) {
 
                 this.id_pokoju = id_pokoju;
                 this.cena = cena;
                 this.liczba_osob = liczba_osob;
                 this.metraz = metraz;
                 this.czy_dostepny = czy_dostepny;
-                this.typ_pokoju = typ_pokoju;
         }
 
         public Pokoje() {
