@@ -58,13 +58,11 @@ public class Klient {
 
     public Klient(String imie,
                   String nazwisko,
-                  LocalDate rok_urodzenia,
-                  Long id_rabatu) {
+                  LocalDate rok_urodzenia) {
         this.id = id;
         this.imie = imie;
         this.nazwisko = nazwisko;
         this.rok_urodzenia = rok_urodzenia;
-        this.rabat = rabat;
     }
 
     public Klient() {

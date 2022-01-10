@@ -17,15 +17,13 @@ public class KlientConfig {
             Klient pawel = new Klient(
                     "Paweł",
                     "Śnioszek",
-                    LocalDate.of(2000, Month.JULY, 6),
-                    85L
+                    LocalDate.of(2000, Month.JULY, 6)
             );
 
             Klient ola = new Klient(
                     "Ola",
                     "aka",
-                    LocalDate.of(1933, Month.JANUARY, 8),
-                    1L
+                    LocalDate.of(1933, Month.JANUARY, 8)
             );
 
             System.out.println("Adding pawel and ola");
