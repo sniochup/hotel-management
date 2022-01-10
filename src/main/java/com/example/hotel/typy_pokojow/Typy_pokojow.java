@@ -1,7 +1,6 @@
 package com.example.hotel.typy_pokojow;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 
 @Entity(name = "Typy_pokojow")
 @Table(
@@ -75,7 +74,7 @@ public class Typy_pokojow {
         return id_typu;
     }
 
-    public void setId_typu() {
+    public void setId_typu(Long id_typu) {
         this.id_typu = id_typu;
     }
 
@@ -83,7 +82,7 @@ public class Typy_pokojow {
         return standard;
     }
 
-    public void setStandard() {
+    public void setStandard(String standard) {
         this.standard = standard;
     }
 
@@ -91,7 +90,7 @@ public class Typy_pokojow {
         return czy_klima;
     }
 
-    public void setCzy_klima() {
+    public void setCzy_klima(Boolean czy_klima) {
         this.czy_klima = czy_klima;
     }
 
@@ -99,7 +98,7 @@ public class Typy_pokojow {
         return czy_balkon;
     }
 
-    public void setCzy_balkon() {
+    public void setCzy_balkon(Boolean czy_balkon) {
         this.czy_balkon = czy_balkon;
     }
 
@@ -107,7 +106,7 @@ public class Typy_pokojow {
         return czy_kuchnia;
     }
 
-    public void setCzy_kuchnia() {
+    public void setCzy_kuchnia(Boolean czy_kuchnia) {
         this.czy_kuchnia = czy_kuchnia;
     }
 
