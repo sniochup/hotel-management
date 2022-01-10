@@ -1,10 +1,9 @@
-package com.example.hotel;
+package com.example.hotel.klient;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.List;
@@ -19,16 +18,14 @@ public class KlientConfig {
                     "Paweł",
                     "Śnioszek",
                     LocalDate.of(2000, Month.JULY, 6),
-                    85L,
-                    89L
+                    85L
             );
 
             Klient ola = new Klient(
                     "Ola",
                     "aka",
                     LocalDate.of(1933, Month.JANUARY, 8),
-                    1L,
-                    2L
+                    1L
             );
 
             System.out.println("Adding pawel and ola");

@@ -1,9 +1,9 @@
-package com.example.hotel;
+package com.example.hotel.klient;
+
+import com.example.hotel.rabaty.Rabaty;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.Period;
-import java.util.Date;
 
 @Entity(name = "Klient")
 @Table(
@@ -30,6 +30,10 @@ public class Klient {
     )
     private Long id;
 
+    @ManyToOne
+    @JoinColumn(name = "id_rabatu", table = "Rabaty")
+    private Rabaty rabat;
+
     @Column(
             name = "imie",
             nullable = false,
@@ -51,27 +55,16 @@ public class Klient {
     )
     private LocalDate rok_urodzenia;
 
-    @Column(
-            name = "rabaty_id_rabatu"
-    )
-    private Long rabaty_id_rabatu;
-
-    @Column(
-            name = "rabat_id_rabatu"
-    )
-    private Long rabat_id_rabatu;
 
     public Klient(String imie,
                   String nazwisko,
                   LocalDate rok_urodzenia,
-                  Long rabaty_id_rabatu,
-                  Long rabat_id_rabatu) {
+                  Long id_rabatu) {
         this.id = id;
         this.imie = imie;
         this.nazwisko = nazwisko;
         this.rok_urodzenia = rok_urodzenia;
-        this.rabaty_id_rabatu = rabaty_id_rabatu;
-        this.rabat_id_rabatu = rabat_id_rabatu;
+        this.rabat = rabat;
     }
 
     public Klient() {
@@ -110,21 +103,14 @@ public class Klient {
         this.rok_urodzenia = rok_urodzenia;
     }
 
-    public Long getRabaty_id_rabatu() {
-        return rabaty_id_rabatu;
+    public Long getId_rabatu() {
+        return rabat.getId_rabatu();
     }
 
-    public void setRabaty_id_rabatu(Long rabaty_id_rabatu) {
-        this.rabaty_id_rabatu = rabaty_id_rabatu;
+    public void setId_rabatu(Long id_rabatu) {
+        this.rabat.setId_rabatu(id_rabatu);
     }
 
-    public Long getRabat_id_rabatu() {
-        return rabat_id_rabatu;
-    }
-
-    public void setRabat_id_rabatu(Long rabat_id_rabatu) {
-        this.rabat_id_rabatu = rabat_id_rabatu;
-    }
 
     @Override
     public String toString() {
@@ -133,8 +119,7 @@ public class Klient {
                 ", imie='" + imie + '\'' +
                 ", nazwisko='" + nazwisko + '\'' +
                 ", rok_urodzenia=" + rok_urodzenia +
-                ", rabaty_id_rabatu=" + rabaty_id_rabatu +
-                ", rabat_id_rabatu=" + rabat_id_rabatu +
+                ", id_rabatu=" + rabat +
                 '}';
     }
 }
