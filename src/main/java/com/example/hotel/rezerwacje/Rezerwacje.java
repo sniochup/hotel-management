@@ -1,6 +1,7 @@
 package com.example.hotel.rezerwacje;
 
 import com.example.hotel.klient.Klient;
+import com.example.hotel.miejsca_parkingowe.Miejsca_parkingowe;
 import com.example.hotel.pokoje.Pokoje;
 
 import javax.persistence.*;
@@ -42,6 +43,16 @@ public class Rezerwacje {
             inverseJoinColumns = @JoinColumn(name = "id_pokoju")
     )
     private Set<Pokoje> pokoje = new HashSet<>();
+
+    @ManyToMany(
+            cascade = {CascadeType.MERGE, CascadeType.PERSIST}
+    )
+    @JoinTable(
+            name = "zarezerw_miejsca_parkingowe",
+            joinColumns = @JoinColumn(name = "id_rezerwacji"),
+            inverseJoinColumns = @JoinColumn(name = "id_miejsca")
+    )
+    private Set<Miejsca_parkingowe> miejsca_parkingowe = new HashSet<>();
 
     @Column(
             name = "data_od",

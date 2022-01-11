@@ -1,6 +1,10 @@
 package com.example.hotel.miejsca_parkingowe;
 
+import com.example.hotel.rezerwacje.Rezerwacje;
+
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity(name = "Miejsca_parkingowe")
 @Table(
@@ -41,6 +45,9 @@ public class Miejsca_parkingowe {
            columnDefinition = "STRING"
    )
     private String typ;
+
+    @ManyToMany(mappedBy = "miejsca_parkingowe")
+    private Set<Rezerwacje> rezerwacje = new HashSet<>();
 
    public Miejsca_parkingowe(Integer cena,
                              String typ) {
