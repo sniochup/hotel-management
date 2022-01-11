@@ -1,9 +1,12 @@
 package com.example.hotel.rezerwacje;
 
 import com.example.hotel.klient.Klient;
+import com.example.hotel.pokoje.Pokoje;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity(name = "Rezerwacje")
 @Table(
@@ -29,6 +32,16 @@ public class Rezerwacje {
             updatable = false
     )
     private Long id_rezerwacji;
+
+    @ManyToMany(
+            cascade = {CascadeType.MERGE, CascadeType.PERSIST}
+    )
+    @JoinTable(
+            name = "zarezerwowane_pokoje",
+            joinColumns = @JoinColumn(name = "id_rezerwacji"),
+            inverseJoinColumns = @JoinColumn(name = "id_pokoju")
+    )
+    private Set<Pokoje> pokoje = new HashSet<>();
 
     @Column(
             name = "data_od",
@@ -141,6 +154,7 @@ public class Rezerwacje {
     public void setId_klienta(Long id_klienta) {
         this.klient.setId(id_klienta);
     }
+
 
     @Override
     public String toString() {
