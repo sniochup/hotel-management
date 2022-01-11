@@ -1,6 +1,10 @@
 package com.example.hotel.pakiety_wyzywien;
 
+import com.example.hotel.rezerwacje.Rezerwacje;
+
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity(name = "Pakiety_wyzywien")
 @Table(
@@ -41,6 +45,9 @@ public class Pakiety_wyzywien {
             columnDefinition = "NUMBER"
     )
     private Integer cena_dzien;
+
+    @ManyToMany(mappedBy = "pakiety_wyzywien")
+    private Set<Rezerwacje> rezerwacje = new HashSet<>();
 
 
     public Pakiety_wyzywien(String typ, Integer cena_dzien) {

@@ -2,6 +2,7 @@ package com.example.hotel.rezerwacje;
 
 import com.example.hotel.klient.Klient;
 import com.example.hotel.miejsca_parkingowe.Miejsca_parkingowe;
+import com.example.hotel.pakiety_wyzywien.Pakiety_wyzywien;
 import com.example.hotel.pokoje.Pokoje;
 
 import javax.persistence.*;
@@ -53,6 +54,16 @@ public class Rezerwacje {
             inverseJoinColumns = @JoinColumn(name = "id_miejsca")
     )
     private Set<Miejsca_parkingowe> miejsca_parkingowe = new HashSet<>();
+
+    @ManyToMany(
+            cascade = {CascadeType.MERGE, CascadeType.PERSIST}
+    )
+    @JoinTable(
+            name = "wykupione_wyzywienie",
+            joinColumns = @JoinColumn(name = "id_rezerwacji"),
+            inverseJoinColumns = @JoinColumn(name = "id_pakietu")
+    )
+    private Set<Pakiety_wyzywien> pakiety_wyzywien = new HashSet<>();
 
     @Column(
             name = "data_od",
