@@ -1,9 +1,14 @@
 package com.example.hotel.klient;
 
 import com.example.hotel.rabaty.Rabaty;
+import com.example.hotel.rezerwacje.Rezerwacje;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Collection;
 
 @Entity(name = "Klient")
 @Table(
@@ -31,8 +36,15 @@ public class Klient {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "id_rabatu", table = "Rabaty")
+    @JoinTable(name = "rabaty_klienci",
+            joinColumns ={ @JoinColumn(name = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "id_rabatu")})
     private Rabaty rabat;
+
+    @OneToMany(mappedBy = "klient")
+    @Fetch(FetchMode.JOIN)
+    @JsonIgnore
+    private Collection<Rezerwacje> rezerwacja;
 
     @Column(
             name = "imie",

@@ -33,7 +33,7 @@ public class Pokoje {
         private Long id_pokoju;
 
         @ManyToMany(mappedBy = "pokoje")
-        private Set<Rezerwacje> rezerwacje = new HashSet<>();
+        private Set<Rezerwacje> rezerwacja = new HashSet<>();
 
         @Column(
                 name = "cena",
@@ -64,7 +64,9 @@ public class Pokoje {
         private Boolean czy_dostepny;
 
         @ManyToOne
-        @JoinColumn(name = "id_typu", table = "Typy_pokojow")
+        @JoinTable(name = "typy_pokojow_pokoje",
+                joinColumns ={ @JoinColumn(name = "id_pokoju")},
+                inverseJoinColumns = {@JoinColumn(name = "id_typu")})
         private Typy_pokojow typ_pokoju;
 
         public Pokoje(Integer cena,

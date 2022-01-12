@@ -69,11 +69,15 @@ public class Pracownicy {
     private Boolean czy_zatrudniony;
 
     @ManyToOne
-    @JoinColumn(name = "nazwa", table = "Stanowiska")
+    @JoinTable(name = "stanowiska_pracownicy",
+            joinColumns ={ @JoinColumn(name = "id_pracownika")},
+            inverseJoinColumns = {@JoinColumn(name = "nazwa")})
     private Stanowiska stanowisko;
 
     @ManyToOne
-    @JoinColumn(name = "id_uslugi", table = "Uslugi")
+    @JoinTable(name = "uslugi_pracownicy",
+            joinColumns ={ @JoinColumn(name = "id_pracownika")},
+            inverseJoinColumns = {@JoinColumn(name = "id_uslugi")})
     private Uslugi usluga;
 
     public Pracownicy(String imie, String nazwisko, LocalDate data_zatrudnienia, Integer placa_pod, Boolean czy_zatrudniony, Stanowiska stanowisko, Uslugi usluga) {

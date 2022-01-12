@@ -1,8 +1,13 @@
 package com.example.hotel.uslugi;
 
+import com.example.hotel.pracownicy.Pracownicy;
 import com.example.hotel.rezerwacje.Rezerwacje;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -42,6 +47,11 @@ public class Uslugi {
             columnDefinition = "STRING"
     )
     private String nazwa;
+
+    @OneToMany(mappedBy = "usluga")
+    @Fetch(FetchMode.JOIN)
+    @JsonIgnore
+    private Collection<Pracownicy> pracownik;
 
     @Column(
             name = "cena",

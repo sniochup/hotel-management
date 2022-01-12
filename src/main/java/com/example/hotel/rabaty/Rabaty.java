@@ -1,6 +1,12 @@
 package com.example.hotel.rabaty;
 
+import com.example.hotel.klient.Klient;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import javax.persistence.*;
+import java.util.Collection;
 
 @Entity(name = "Rabaty")
 @Table(
@@ -25,6 +31,11 @@ public class Rabaty {
             updatable = false
     )
     private Long id_rabatu;
+
+    @OneToMany(mappedBy = "rabat")
+    @Fetch(FetchMode.JOIN)
+    @JsonIgnore
+    private Collection<Klient> klient;
 
     @Column(
             name = "wysokosc_rabatu",
