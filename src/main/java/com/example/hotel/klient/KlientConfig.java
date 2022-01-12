@@ -21,8 +21,6 @@ public class KlientConfig {
                     "Paweł",
                     "Śnioszek",
                     LocalDate.of(2000, Month.JULY, 6),
-                    85L,
-                    89L,
                     "pawel",
                     passwordEncoder.encode("pawel"));
 
@@ -30,8 +28,6 @@ public class KlientConfig {
                     "Julia",
                     "Tokłowicz",
                     LocalDate.of(1933, Month.JANUARY, 8),
-                    18L,
-                    2L,
                     "julia",
                     passwordEncoder.encode("julia"));
 

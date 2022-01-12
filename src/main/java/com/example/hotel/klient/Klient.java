@@ -1,14 +1,22 @@
 package com.example.hotel.klient;
 
+
 import lombok.EqualsAndHashCode;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.example.hotel.rabaty.Rabaty;
+import com.example.hotel.rezerwacje.Rezerwacje;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Collections;
+
 
 @Entity(name = "Klient")
 @Table(
@@ -36,6 +44,17 @@ public class Klient implements UserDetails {
     )
     private Long id;
 
+    @ManyToOne
+    @JoinTable(name = "rabaty_klienci",
+            joinColumns ={ @JoinColumn(name = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "id_rabatu")})
+    private Rabaty rabat;
+
+    @OneToMany(mappedBy = "klient")
+    @Fetch(FetchMode.JOIN)
+    @JsonIgnore
+    private Collection<Rezerwacje> rezerwacja;
+
     @Column(
             name = "imie",
             nullable = false,
@@ -58,16 +77,6 @@ public class Klient implements UserDetails {
     private LocalDate rok_urodzenia;
 
     @Column(
-            name = "rabaty_id_rabatu"
-    )
-    private Long rabaty_id_rabatu;
-
-    @Column(
-            name = "rabat_id_rabatu"
-    )
-    private Long rabat_id_rabatu;
-
-    @Column(
             name = "login",
             nullable = false,
             columnDefinition = "TEXT"
@@ -83,16 +92,13 @@ public class Klient implements UserDetails {
     public Klient(String imie,
                   String nazwisko,
                   LocalDate rok_urodzenia,
-                  Long rabaty_id_rabatu,
-                  Long rabat_id_rabatu,
                   String login,
                   String password) {
+
         this.id = id;
         this.imie = imie;
         this.nazwisko = nazwisko;
         this.rok_urodzenia = rok_urodzenia;
-        this.rabaty_id_rabatu = rabaty_id_rabatu;
-        this.rabat_id_rabatu = rabat_id_rabatu;
         this.login = login;
         this.password = password;
     }
@@ -131,22 +137,6 @@ public class Klient implements UserDetails {
 
     public void setRok_urodzenia(LocalDate rok_urodzenia) {
         this.rok_urodzenia = rok_urodzenia;
-    }
-
-    public Long getRabaty_id_rabatu() {
-        return rabaty_id_rabatu;
-    }
-
-    public void setRabaty_id_rabatu(Long rabaty_id_rabatu) {
-        this.rabaty_id_rabatu = rabaty_id_rabatu;
-    }
-
-    public Long getRabat_id_rabatu() {
-        return rabat_id_rabatu;
-    }
-
-    public void setRabat_id_rabatu(Long rabat_id_rabatu) {
-        this.rabat_id_rabatu = rabat_id_rabatu;
     }
 
     public String getLogin() {
@@ -197,6 +187,14 @@ public class Klient implements UserDetails {
         this.password = password;
     }
 
+    public Long getId_rabatu() {
+        return rabat.getId_rabatu();
+    }
+
+    public void setId_rabatu(Long id_rabatu) {
+        this.rabat.setId_rabatu(id_rabatu);
+    }
+
     @Override
     public String toString() {
         return "Klient{" +
@@ -204,9 +202,8 @@ public class Klient implements UserDetails {
                 ", imie='" + imie + '\'' +
                 ", nazwisko='" + nazwisko + '\'' +
                 ", rok_urodzenia=" + rok_urodzenia +
-                ", rabaty_id_rabatu=" + rabaty_id_rabatu +
-                ", rabat_id_rabatu=" + rabat_id_rabatu +
                 ", login=" + login +
+                ", id_rabatu=" + rabat +
                 '}';
     }
 }
