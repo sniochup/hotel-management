@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>List</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+
+</head>
+<body>
+<nav th:replace="fragments/navbar :: navbar"></nav>
+
+<main class="container-sm mt-1">
+    <table class="table table-striped">
+
+        <tr class="header-text-size">
+            <th>ID</th>
+            <th>Imie</th>
+            <th>Nazwisko</th>
+            <th>rok_urodzenia</th>
+            <th>rabaty_id_rabatu</th>
+            <th>rabat_id_rabatu</th>
+        </tr>
+
+        <tr th:each="k : ${clientsAttributes}" class="table-text-size">
+            <td th:text="${k.id}">ID</td>
+            <td th:text="${k.imie}">Imie</td>
+            <td th:text="${k.nazwisko}">Nazwisko</td>
+            <td th:text="${k.rok_urodzenia}">rok_urodzenia</td>
+            <td th:text="${k.rabaty_id_rabatu}">rabaty_id_rabatu</td>
+            <td th:text="${k.rabat_id_rabatu}">rabat_id_rabatu</td>
+        </tr>
+
+    </table>
+</main>
+</body>
+</html>
