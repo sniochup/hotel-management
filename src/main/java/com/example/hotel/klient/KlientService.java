@@ -1,6 +1,9 @@
-package com.example.hotel;
+package com.example.hotel.klient;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -8,10 +11,9 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 @Service
-public class KlientService {
+public class KlientService implements UserDetailsService {
 
     private final KlientRepository klientRepository;
 
@@ -19,6 +21,7 @@ public class KlientService {
     public KlientService(KlientRepository klientRepository) {
         this.klientRepository = klientRepository;
     }
+
     public List<Klient> getKlient() {
         return klientRepository.findAll();
     }
@@ -52,5 +55,17 @@ public class KlientService {
                 !Objects.equals(klient.getNazwisko(), nazwisko)) {
             klient.setNazwisko(nazwisko);
         }
+    }
+
+    public Klient authenticate(String login, String password) {
+        return klientRepository.findByLoginAndPassword(login, password).orElse(null);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String login)
+            throws UsernameNotFoundException {
+        return (UserDetails) klientRepository.findByLogin(login)
+                .orElseThrow(() ->
+                        new UsernameNotFoundException("User with login " + login + " not found"));
     }
 }

@@ -3,6 +3,7 @@ package com.example.hotel.klient;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.time.LocalDate;
 import java.time.Month;
@@ -11,23 +12,27 @@ import java.util.List;
 @Configuration
 public class KlientConfig {
 
+    BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
     @Bean
     CommandLineRunner commandLineRunner(KlientRepository klientRepository) {
         return args -> {
             Klient pawel = new Klient(
                     "Paweł",
                     "Śnioszek",
-                    LocalDate.of(2000, Month.JULY, 6)
-            );
+                    LocalDate.of(2000, Month.JULY, 6),
+                    "pawel",
+                    passwordEncoder.encode("pawel"));
 
-            Klient ola = new Klient(
-                    "Ola",
-                    "aka",
-                    LocalDate.of(1933, Month.JANUARY, 8)
-            );
+            Klient julia = new Klient(
+                    "Julia",
+                    "Tokłowicz",
+                    LocalDate.of(1933, Month.JANUARY, 8),
+                    "julia",
+                    passwordEncoder.encode("julia"));
 
-            System.out.println("Adding pawel and ola");
-            klientRepository.saveAll(List.of(pawel, ola));
+            System.out.println("Adding pawel and julia");
+            klientRepository.saveAll(List.of(pawel, julia));
 
 //            System.out.print("Number of klients: ");
 //            System.out.println(klientRepository.count());

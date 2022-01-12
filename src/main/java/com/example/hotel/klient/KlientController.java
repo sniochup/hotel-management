@@ -1,13 +1,14 @@
-package com.example.hotel;
+package com.example.hotel.klient;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.swing.text.html.Option;
 import java.util.List;
 
-@RestController
-@RequestMapping(path = "/hotel")
+@Controller
+@RequestMapping(path = "/user")
 public class KlientController {
 
     private final KlientService klientService;
@@ -17,9 +18,18 @@ public class KlientController {
         this.klientService = klientService;
     }
 
-    @GetMapping
-    public List<Klient> getKlient() {
-        return klientService.getKlient();
+    @GetMapping(path = "/get")
+    public String getKlient(Model model) {
+        model.addAttribute("clientsAttributes", klientService.getKlient());
+        return "views/index";
+    }
+
+    @GetMapping(path = "/form")
+    public String getForm(Model model) {
+        model.addAttribute("clientsAttributes", new Klient());
+//        model.addAttribute("programmingLanguage", new ProgrammingLanguage());
+        model.addAttribute("formTitle", "Przykładowy formularz");
+        return "views/form";
     }
 
     @PostMapping
