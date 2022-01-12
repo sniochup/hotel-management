@@ -1,6 +1,10 @@
 package com.example.hotel.uslugi;
 
+import com.example.hotel.rezerwacje.Rezerwacje;
+
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity(name = "Uslugi")
 @Table(
@@ -28,6 +32,9 @@ public class Uslugi {
             updatable = false
     )
     private Long id_uslugi;
+
+    @ManyToMany(mappedBy = "uslugi")
+    private Set<Rezerwacje> rezerwacje = new HashSet<>();
 
     @Column(
             name = "nazwa",
