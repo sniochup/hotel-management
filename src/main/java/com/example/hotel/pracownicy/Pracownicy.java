@@ -8,6 +8,8 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -78,18 +80,23 @@ public class Pracownicy {
     @JoinColumn(name = "nazwa", nullable = false)
     private Stanowiska stanowisko;
 
-    @ManyToOne
-    @JoinColumn(name = "id_ulsugi", nullable = false)
-    private Uslugi usluga;
+    @ManyToMany(
+            cascade = {CascadeType.MERGE, CascadeType.PERSIST}
+    )
+    @JoinTable(
+            name = "wykonywane_uslugi",
+            joinColumns = @JoinColumn(name = "id_pracownika"),
+            inverseJoinColumns = @JoinColumn(name = "id_uslugi")
+    )
+    private Set<Uslugi> uslugi = new HashSet<>();
 
-    public Pracownicy(String imie, String nazwisko, LocalDate data_zatrudnienia, Integer placa_pod, Boolean czy_zatrudniony, Stanowiska stanowisko, Uslugi usluga) {
+    public Pracownicy(String imie, String nazwisko, LocalDate data_zatrudnienia, Integer placa_pod, Boolean czy_zatrudniony, Stanowiska stanowisko) {
         this.imie = imie;
         this.nazwisko = nazwisko;
         this.data_zatrudnienia = data_zatrudnienia;
         this.placa_pod = placa_pod;
         this.czy_zatrudniony = czy_zatrudniony;
         this.stanowisko = stanowisko;
-        this.usluga = usluga;
     }
 
     @Override
@@ -102,7 +109,7 @@ public class Pracownicy {
                 ", placa_pod=" + placa_pod +
                 ", czy_zatrudniony=" + czy_zatrudniony +
                 ", stanowisko=" + stanowisko +
-                ", usluga=" + usluga +
+                ", usluga=" + uslugi +
                 '}';
     }
 }
