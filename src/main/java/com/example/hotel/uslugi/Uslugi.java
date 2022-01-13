@@ -3,6 +3,9 @@ package com.example.hotel.uslugi;
 import com.example.hotel.pracownicy.Pracownicy;
 import com.example.hotel.rezerwacje.Rezerwacje;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
@@ -11,6 +14,10 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
+@Getter
+@Setter
+@NoArgsConstructor
+
 @Entity(name = "Uslugi")
 @Table(
         name = "usugi",
@@ -18,8 +25,6 @@ import java.util.Set;
                 @UniqueConstraint(name = "id_uslugi_unique", columnNames = "id_uslugi")
         }
 )
-
-
 public class Uslugi {
 
     @Id
@@ -44,7 +49,7 @@ public class Uslugi {
     @Column(
             name = "nazwa",
             nullable = false,
-            columnDefinition = "STRING"
+            columnDefinition = "VARCHAR(30)"
     )
     private String nazwa;
 
@@ -56,41 +61,13 @@ public class Uslugi {
     @Column(
             name = "cena",
             nullable = false,
-            columnDefinition = "NUMBER"
+            columnDefinition = "NUMERIC(6, 2)"
     )
     private Integer cena;
 
     public Uslugi(String nazwa, Integer cena) {
         this.id_uslugi = id_uslugi;
         this.nazwa = nazwa;
-        this.cena = cena;
-    }
-
-    public Uslugi() {
-
-    }
-
-    public Long getId_uslugi() {
-        return id_uslugi;
-    }
-
-    public void setId_uslugi(Long id_uslugi) {
-        this.id_uslugi = id_uslugi;
-    }
-
-    public String getNazwa() {
-        return nazwa;
-    }
-
-    public void setNazwa(String nazwa) {
-        this.nazwa = nazwa;
-    }
-
-    public Integer getCena() {
-        return cena;
-    }
-
-    public void setCena(Integer cena) {
         this.cena = cena;
     }
 

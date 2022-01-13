@@ -1,10 +1,18 @@
-package com.example.hotel.pakiety_wyzywien;
+package com.example.hotel.pakietyWyzywien;
 
 import com.example.hotel.rezerwacje.Rezerwacje;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
+
+
+@Getter
+@Setter
+@NoArgsConstructor
 
 @Entity(name = "Pakiety_wyzywien")
 @Table(
@@ -14,17 +22,17 @@ import java.util.Set;
         }
 )
 
-public class Pakiety_wyzywien {
+public class PakietyWyzywien {
 
     @Id
     @SequenceGenerator(
-            name = "parking_sequence",
-            sequenceName = "parking_sequence",
+            name = "pakiet_wyzywienia_sequence",
+            sequenceName = "pakiet_wyzywienia_sequence",
             allocationSize = 1
     )
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-            generator = "parking_sequence"
+            generator = "pakiet_wyzywienia_sequence"
     )
     @Column(
             name = "id_pakietu",
@@ -34,15 +42,15 @@ public class Pakiety_wyzywien {
 
     @Column(
             name = "typ",
-            updatable = false,
-            columnDefinition = "STRING"
+            nullable = false,
+            columnDefinition = "VARCHAR(30)"
     )
     private String typ;
 
     @Column(
             name = "cena_dzien",
-            updatable = false,
-            columnDefinition = "NUMBER"
+            nullable = false,
+            columnDefinition = "NUMERIC(6, 2)"
     )
     private Integer cena_dzien;
 
@@ -50,43 +58,15 @@ public class Pakiety_wyzywien {
     private Set<Rezerwacje> rezerwacje = new HashSet<>();
 
 
-    public Pakiety_wyzywien(String typ, Integer cena_dzien) {
+    public PakietyWyzywien(String typ, Integer cena_dzien) {
         this.id_pakietu = id_pakietu;
         this.typ = typ;
-        this.cena_dzien = cena_dzien;
-    }
-
-    public Pakiety_wyzywien() {
-
-    }
-
-    public Long getId_pakietu() {
-        return id_pakietu;
-    }
-
-    public void setId_pakietu(Long id_pakietu) {
-        this.id_pakietu = id_pakietu;
-    }
-
-    public String getTyp() {
-        return typ;
-    }
-
-    public void setTyp(String typ) {
-        this.typ = typ;
-    }
-
-    public Integer getCena_dzien() {
-        return cena_dzien;
-    }
-
-    public void setCena_dzien(Integer cena_dzien) {
         this.cena_dzien = cena_dzien;
     }
 
     @Override
     public String toString() {
-        return "Pakiety_wyzywien{" +
+        return "PakietyWyzywien{" +
                 "id_pakietu=" + id_pakietu +
                 ", typ='" + typ + '\'' +
                 ", cena_dzien=" + cena_dzien +

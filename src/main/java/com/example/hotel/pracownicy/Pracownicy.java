@@ -1,11 +1,17 @@
 package com.example.hotel.pracownicy;
 
-import com.example.hotel.klient.Klient;
 import com.example.hotel.stanowiska.Stanowiska;
 import com.example.hotel.uslugi.Uslugi;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+
+@Getter
+@Setter
+@NoArgsConstructor
 
 @Entity(name = "Pracownicy")
 @Table(
@@ -36,14 +42,14 @@ public class Pracownicy {
     @Column(
             name = "imie",
             nullable = false,
-            columnDefinition = "STRING"
+            columnDefinition = "VARCHAR(20)"
     )
     private String imie;
 
     @Column(
             name = "nazwisko",
             nullable = false,
-            columnDefinition = "STRING"
+            columnDefinition = "VARCHAR(20)"
     )
     private String nazwisko;
 
@@ -57,7 +63,7 @@ public class Pracownicy {
     @Column(
             name = "placa_pod",
             nullable = false,
-            columnDefinition = "NUMBER"
+            columnDefinition = "NUMERIC(6, 2)"
     )
     private Integer placa_pod;
 
@@ -87,74 +93,6 @@ public class Pracownicy {
         this.placa_pod = placa_pod;
         this.czy_zatrudniony = czy_zatrudniony;
         this.stanowisko = stanowisko;
-        this.usluga = usluga;
-    }
-
-    public Pracownicy() {
-
-    }
-
-    public Long getId_pracownika() {
-        return id_pracownika;
-    }
-
-    public void setId_pracownika(Long id_pracownika) {
-        this.id_pracownika = id_pracownika;
-    }
-
-    public String getImie() {
-        return imie;
-    }
-
-    public void setImie(String imie) {
-        this.imie = imie;
-    }
-
-    public String getNazwisko() {
-        return nazwisko;
-    }
-
-    public void setNazwisko(String nazwisko) {
-        this.nazwisko = nazwisko;
-    }
-
-    public LocalDate getData_zatrudnienia() {
-        return data_zatrudnienia;
-    }
-
-    public void setData_zatrudnienia(LocalDate data_zatrudnienia) {
-        this.data_zatrudnienia = data_zatrudnienia;
-    }
-
-    public Integer getPlaca_pod() {
-        return placa_pod;
-    }
-
-    public void setPlaca_pod(Integer placa_pod) {
-        this.placa_pod = placa_pod;
-    }
-
-    public Boolean getCzy_zatrudniony() {
-        return czy_zatrudniony;
-    }
-
-    public void setCzy_zatrudniony(Boolean czy_zatrudniony) {
-        this.czy_zatrudniony = czy_zatrudniony;
-    }
-
-    public Stanowiska getStanowisko() {
-        return stanowisko;
-    }
-
-    public void setStanowisko(Stanowiska stanowisko) {
-        this.stanowisko = stanowisko;
-    }
-
-    public Uslugi getUsluga() {
-        return usluga;
-    }
-
-    public void setUsluga(Uslugi usluga) {
         this.usluga = usluga;
     }
 

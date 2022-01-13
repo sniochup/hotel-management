@@ -1,12 +1,19 @@
 package com.example.hotel.rabaty;
 
-import com.example.hotel.klient.Klient;
+import com.example.hotel.klienci.Klienci;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.util.Collection;
+
+@Getter
+@Setter
+@NoArgsConstructor
 
 @Entity(name = "Rabaty")
 @Table(
@@ -35,19 +42,19 @@ public class Rabaty {
     @OneToMany(mappedBy = "rabat")
     @Fetch(FetchMode.JOIN)
     @JsonIgnore
-    private Collection<Klient> klient;
+    private Collection<Klienci> klient;
 
     @Column(
             name = "wysokosc_rabatu",
             nullable = false,
-            columnDefinition = "FLOAT"
+            columnDefinition = "NUMERIC(6,2)"
     )
     private Float wysokosc_rabatu;
 
     @Column(
             name = "typ",
             nullable = false,
-            columnDefinition = "STRING"
+            columnDefinition = "VARCHAR(20)"
     )
     private String typ;
 
@@ -58,41 +65,12 @@ public class Rabaty {
         this.typ = typ;
     }
 
-    public Rabaty() {
-
-    }
-
-    public Long getId_rabatu() {
-        return id_rabatu;
-    }
-
-    public void setId_rabatu(Long id_rabatu) {
-        this.id_rabatu = id_rabatu;
-    }
-
-    public Float getWysokosc_rabatu() {
-        return wysokosc_rabatu;
-    }
-
-    public void setWysokosc_rabatu(Float wysokosc_rabatu) {
-        this.wysokosc_rabatu = wysokosc_rabatu;
-    }
-
-    public String getTyp() {
-        return typ;
-    }
-
-    public void setTyp(String typ) {
-        this.typ = typ;
-    }
-
     @Override
     public String toString() {
-        return "Rabat{" +
+        return "Rabaty{" +
                 "id_rabatu=" + id_rabatu +
-                ", wysokosc_rabatu='" + wysokosc_rabatu + '\'' +
+                ", wysokosc_rabatu=" + wysokosc_rabatu +
                 ", typ='" + typ + '\'' +
                 '}';
     }
-
 }

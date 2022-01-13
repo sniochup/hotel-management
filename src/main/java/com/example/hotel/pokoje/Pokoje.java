@@ -1,11 +1,18 @@
 package com.example.hotel.pokoje;
 
 import com.example.hotel.rezerwacje.Rezerwacje;
-import com.example.hotel.typy_pokojow.Typy_pokojow;
+import com.example.hotel.typyPokojow.TypyPokojow;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
+
+@Getter
+@Setter
+@NoArgsConstructor
 
 @Entity(name = "Pokoje")
 @Table(
@@ -37,28 +44,28 @@ public class Pokoje {
 
         @Column(
                 name = "cena",
-                updatable = false,
-                columnDefinition = "NUMBER"
+                nullable = false,
+                columnDefinition = "NUMERIC(6, 2)"
         )
         private Integer cena;
 
         @Column(
                 name = "liczba_osob",
-                updatable = false,
-                columnDefinition = "NUMBER"
+                nullable = false,
+                columnDefinition = "NUMERIC(4)"
         )
         private Integer liczba_osob;
 
         @Column(
                 name = "metraz",
-                updatable = false,
-                columnDefinition = "NUMBER"
+                nullable = false,
+                columnDefinition = "NUMERIC(3)"
         )
         private Integer metraz;
 
         @Column(
                 name = "czy_dostepny",
-                updatable = true,
+                nullable = false,
                 columnDefinition = "BOOLEAN"
         )
         private Boolean czy_dostepny;
@@ -67,7 +74,7 @@ public class Pokoje {
         @JoinTable(name = "typy_pokojow_pokoje",
                 joinColumns ={ @JoinColumn(name = "id_pokoju")},
                 inverseJoinColumns = {@JoinColumn(name = "id_typu")})
-        private Typy_pokojow typ_pokoju;
+        private TypyPokojow typ_pokoju;
 
         public Pokoje(Integer cena,
                       Integer liczba_osob,
@@ -81,66 +88,15 @@ public class Pokoje {
                 this.czy_dostepny = czy_dostepny;
         }
 
-        public Pokoje() {
-
-        }
-
-        public Long getId_pokoju() {
-                return id_pokoju;
-        }
-
-        public void setId_pokoju(Long id_pokoju) {
-                this.id_pokoju = id_pokoju;
-        }
-
-        public Integer getCena() {
-                return cena;
-        }
-
-        public void setCena(Integer cena) {
-                this.cena = cena;
-        }
-
-        public Integer getLiczba_osob() {
-                return liczba_osob;
-        }
-
-        public void setLiczba_osob(Integer liczba_osob) {
-                this.liczba_osob = liczba_osob;
-        }
-
-        public Integer getMetraz() {
-                return metraz;
-        }
-
-        public void setMetraz(Integer metraz) {
-                this.metraz = metraz;
-        }
-
-        public Boolean getCzy_dostepny() {
-                return czy_dostepny;
-        }
-
-        public void setCzy_dostepny(Boolean czy_dostepny) {
-                this.czy_dostepny = czy_dostepny;
-        }
-
-        public Long getTyp_pokoju() {
-                return typ_pokoju.getId_typu();
-        }
-
-        public void setTyp_pokoju(Long id_typu) {
-                this.typ_pokoju.setId_typu(id_typu);
-        }
-
         @Override
         public String toString() {
-                return "Pokoj{" +
-                        "id pokoju=" + id_pokoju +
-                        ", cena='" + cena+ '\'' +
-                        ", liczba_osob='" + liczba_osob + '\'' +
+                return "Pokoje{" +
+                        "id_pokoju=" + id_pokoju +
+                        ", cena=" + cena +
+                        ", liczba_osob=" + liczba_osob +
                         ", metraz=" + metraz +
-                        ", id typu pokoju=" + typ_pokoju +
+                        ", czy_dostepny=" + czy_dostepny +
+                        ", typ_pokoju=" + typ_pokoju +
                         '}';
         }
 }

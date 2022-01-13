@@ -1,15 +1,22 @@
 package com.example.hotel.rezerwacje;
 
-import com.example.hotel.klient.Klient;
-import com.example.hotel.miejsca_parkingowe.Miejsca_parkingowe;
-import com.example.hotel.pakiety_wyzywien.Pakiety_wyzywien;
+import com.example.hotel.klienci.Klienci;
+import com.example.hotel.miejscaParkingowe.MiejscaParkingowe;
+import com.example.hotel.pakietyWyzywien.PakietyWyzywien;
 import com.example.hotel.pokoje.Pokoje;
 import com.example.hotel.uslugi.Uslugi;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
+
+@Getter
+@Setter
+@NoArgsConstructor
 
 @Entity(name = "Rezerwacje")
 @Table(
@@ -54,7 +61,7 @@ public class Rezerwacje {
             joinColumns = @JoinColumn(name = "id_rezerwacji"),
             inverseJoinColumns = @JoinColumn(name = "id_miejsca")
     )
-    private Set<Miejsca_parkingowe> miejsca_parkingowe = new HashSet<>();
+    private Set<MiejscaParkingowe> miejsca_parkingowe = new HashSet<>();
 
     @ManyToMany(
             cascade = {CascadeType.MERGE, CascadeType.PERSIST}
@@ -64,7 +71,7 @@ public class Rezerwacje {
             joinColumns = @JoinColumn(name = "id_rezerwacji"),
             inverseJoinColumns = @JoinColumn(name = "id_pakietu")
     )
-    private Set<Pakiety_wyzywien> pakiety_wyzywien = new HashSet<>();
+    private Set<PakietyWyzywien> pakiety_wyzywien = new HashSet<>();
 
     @ManyToMany(
             cascade = {CascadeType.MERGE, CascadeType.PERSIST}
@@ -93,29 +100,29 @@ public class Rezerwacje {
     @Column(
             name = "status",
             nullable = false,
-            columnDefinition = "STRING"
+            columnDefinition = "VARCHAR(30)"
     )
     private String status;
 
     @Column(
             name = "platnosc",
             nullable = false,
-            columnDefinition = "NUMBER"
+            columnDefinition = "NUMERIC(6, 2)"
     )
     private Integer platnosc;
 
     @Column(
             name = "status_platnosci",
             nullable = false,
-            columnDefinition = "STRING"
+            columnDefinition = "VARCHAR(20)"
     )
     private String status_platnosci;
 
     @ManyToOne
     @JoinTable(name = "klienci_rezerwacje",
             joinColumns ={ @JoinColumn(name = "id_rezerwacji")},
-            inverseJoinColumns = {@JoinColumn(name = "id")})
-    private Klient klient;
+            inverseJoinColumns = {@JoinColumn(name = "id_klienta")})
+    private Klienci klient;
 
     public Rezerwacje(LocalDate data_od,
                   LocalDate data_do,
@@ -130,77 +137,16 @@ public class Rezerwacje {
         this.status_platnosci = status_platnosci;
     }
 
-    public Rezerwacje() {
-
-    }
-
-    public Long getId_rezerwacji() {
-        return id_rezerwacji;
-    }
-
-    public void setId_rezerwacji(Long id_rezerwacji) {
-        this.id_rezerwacji = id_rezerwacji;
-    }
-
-    public LocalDate getData_od() {
-        return data_od;
-    }
-
-    public void setData_od(LocalDate data_od) {
-        this.data_od = data_od;
-    }
-
-    public LocalDate getData_do() {
-        return data_do;
-    }
-
-    public void setData_do(LocalDate data_do) {
-        this.data_od = data_do;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public Integer getPlatnosc() {
-        return platnosc;
-    }
-
-    public void setPlatnosc(Integer platnosc) {
-        this.platnosc = platnosc;
-    }
-
-    public String getStatus_platnosci() {
-        return status_platnosci;
-    }
-
-    public void setStatus_platnosci(String status_platnosci) {
-        this.status_platnosci = status_platnosci;
-    }
-
-    public Long getId_klienta() {
-        return klient.getId();
-    }
-
-    public void setId_klienta(Long id_klienta) {
-        this.klient.setId(id_klienta);
-    }
-
-
     @Override
     public String toString() {
-        return "Rezerwacja{" +
-                "id rezerwacji=" + id_rezerwacji +
-                ", data od=" + data_od + '\'' +
-                ", data do=" + data_do + '\'' +
-                ", status=" + status + '\'' +
-                ", platnosc=" + platnosc + '\'' +
-                ", status platnosci=" + status_platnosci + '\'' +
-                ", id klienta=" + klient +
+        return "Rezerwacje{" +
+                "id_rezerwacji=" + id_rezerwacji +
+                ", data_od=" + data_od +
+                ", data_do=" + data_do +
+                ", status='" + status + '\'' +
+                ", platnosc=" + platnosc +
+                ", status_platnosci='" + status_platnosci + '\'' +
+                ", klient=" + klient +
                 '}';
     }
 

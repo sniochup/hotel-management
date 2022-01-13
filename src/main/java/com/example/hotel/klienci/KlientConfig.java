@@ -1,4 +1,4 @@
-package com.example.hotel.klient;
+package com.example.hotel.klienci;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
@@ -14,26 +14,26 @@ public class KlientConfig {
 
     BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-    @Bean
-    CommandLineRunner commandLineRunner(KlientRepository klientRepository) {
-        return args -> {
-            Klient pawel = new Klient(
-                    "Paweł",
-                    "Śnioszek",
-                    LocalDate.of(2000, Month.JULY, 6),
-                    "pawel",
-                    passwordEncoder.encode("pawel"));
-
-            Klient julia = new Klient(
-                    "Julia",
-                    "Tokłowicz",
-                    LocalDate.of(1933, Month.JANUARY, 8),
-                    "julia",
-                    passwordEncoder.encode("julia"));
-
-            System.out.println("Adding pawel and julia");
-            klientRepository.saveAll(List.of(pawel, julia));
-
+//    @Bean
+//    CommandLineRunner commandLineRunner(KlientRepository klientRepository) {
+//        return args -> {
+//            Klienci pawel = new Klienci(
+//                    "Paweł",
+//                    "Śnioszek",
+//                    LocalDate.of(2000, Month.JULY, 6),
+//                    "pawel",
+//                    passwordEncoder.encode("pawel"));
+//
+//            Klienci julia = new Klienci(
+//                    "Julia",
+//                    "Tokłowicz",
+//                    LocalDate.of(1933, Month.JANUARY, 8),
+//                    "julia",
+//                    passwordEncoder.encode("julia"));
+//
+//            System.out.println("Adding pawel and julia");
+//            klientRepository.saveAll(List.of(pawel, julia));
+//
 //            System.out.print("Number of klients: ");
 //            System.out.println(klientRepository.count());
 //
@@ -58,6 +58,6 @@ public class KlientConfig {
 //
 //            System.out.print("Number of klients: ");
 //            System.out.println(klientRepository.count());
-        };
-    }
+//        };
+//    }
 }

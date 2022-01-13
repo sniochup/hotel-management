@@ -1,4 +1,4 @@
-package com.example.hotel.klient;
+package com.example.hotel.klienci;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -22,11 +22,11 @@ public class KlientService implements UserDetailsService {
         this.klientRepository = klientRepository;
     }
 
-    public List<Klient> getKlient() {
+    public List<Klienci> getKlient() {
         return klientRepository.findAll();
     }
 
-    public void addNewKlient(Klient klient) {
+    public void addNewKlient(Klienci klient) {
         if (Period.between(klient.getRok_urodzenia(), LocalDate.now()).getYears() < 18) {
             throw new IllegalStateException("Klient too young!");
         }
@@ -44,7 +44,7 @@ public class KlientService implements UserDetailsService {
 
     @Transactional
     public void updateKlient(Long klientId, String imie, String nazwisko) {
-        Klient klient = klientRepository.findById(klientId)
+        Klienci klient = klientRepository.findById(klientId)
                 .orElseThrow(() -> new IllegalStateException(
                     "klient with id " + klientId + "does not exists"));
         if (imie != null && imie.length() > 0 &&
@@ -57,7 +57,7 @@ public class KlientService implements UserDetailsService {
         }
     }
 
-    public Klient authenticate(String login, String password) {
+    public Klienci authenticate(String login, String password) {
         return klientRepository.findByLoginAndPassword(login, password).orElse(null);
     }
 

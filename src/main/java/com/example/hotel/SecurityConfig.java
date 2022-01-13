@@ -1,8 +1,6 @@
 package com.example.hotel;
 
-import com.example.hotel.klient.KlientRepository;
-import com.example.hotel.klient.KlientService;
-import lombok.AllArgsConstructor;
+import com.example.hotel.klienci.KlientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
