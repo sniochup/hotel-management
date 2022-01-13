@@ -26,7 +26,7 @@ public class Pracownicy {
     @Id
     @SequenceGenerator(
             name = "pracownicy_sequence",
-            sequenceName = "praconwicy_sequence",
+            sequenceName = "pracownicy_sequence",
             allocationSize = 1
     )
     @GeneratedValue(

@@ -33,7 +33,7 @@ public class KlientConfig {
 //
 //            System.out.println("Adding pawel and julia");
 //            klientRepository.saveAll(List.of(pawel, julia));
-//
+
 //            System.out.print("Number of klients: ");
 //            System.out.println(klientRepository.count());
 //
@@ -57,7 +57,7 @@ public class KlientConfig {
 //            klientRepository.deleteById(1L);
 //
 //            System.out.print("Number of klients: ");
-//            System.out.println(klientRepository.count());
+////            System.out.println(klientRepository.count());
 //        };
 //    }
 }

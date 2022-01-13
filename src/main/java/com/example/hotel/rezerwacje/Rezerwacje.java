@@ -106,7 +106,7 @@ public class Rezerwacje {
 
     @Column(
             name = "platnosc",
-            nullable = false,
+//            nullable = false,
             columnDefinition = "NUMERIC(6, 2)"
     )
     private Integer platnosc;

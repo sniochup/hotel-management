@@ -15,21 +15,19 @@
     <table class="table table-striped">
 
         <tr class="header-text-size">
-            <th>ID</th>
+            <th>ID Klienta</th>
             <th>Imie</th>
             <th>Nazwisko</th>
             <th>rok_urodzenia</th>
-            <th>rabaty_id_rabatu</th>
-            <th>rabat_id_rabatu</th>
+            <th>login</th>
         </tr>
 
         <tr th:each="k : ${clientsAttributes}" class="table-text-size">
-            <td th:text="${k.id}">ID</td>
+            <td th:text="${k.id_klienta}">ID</td>
             <td th:text="${k.imie}">Imie</td>
             <td th:text="${k.nazwisko}">Nazwisko</td>
             <td th:text="${k.rok_urodzenia}">rok_urodzenia</td>
-            <td th:text="${k.rabaty_id_rabatu}">rabaty_id_rabatu</td>
-            <td th:text="${k.rabat_id_rabatu}">rabat_id_rabatu</td>
+            <td th:text="${k.login}">rok_urodzenia</td>
         </tr>
 
     </table>

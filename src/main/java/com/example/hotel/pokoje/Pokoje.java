@@ -75,6 +75,21 @@ public class Pokoje {
         @JoinColumn(name = "id_typu", nullable = false)
         private TypyPokojow typ_pokoju;
 
+        public Pokoje(Long id_pokoju,
+                      Integer cena,
+                      Integer liczba_osob,
+                      Integer metraz,
+                      Boolean czy_dostepny,
+                      TypyPokojow typ_pokoju) {
+                this.id_pokoju = id_pokoju;
+                this.rezerwacja = rezerwacja;
+                this.cena = cena;
+                this.liczba_osob = liczba_osob;
+                this.metraz = metraz;
+                this.czy_dostepny = czy_dostepny;
+                this.typ_pokoju = typ_pokoju;
+        }
+
         public Pokoje(Integer cena,
                       Integer liczba_osob,
                       Integer metraz,
