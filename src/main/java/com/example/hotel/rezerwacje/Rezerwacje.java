@@ -119,9 +119,7 @@ public class Rezerwacje {
     private String status_platnosci;
 
     @ManyToOne
-    @JoinTable(name = "klienci_rezerwacje",
-            joinColumns ={ @JoinColumn(name = "id_rezerwacji")},
-            inverseJoinColumns = {@JoinColumn(name = "id_klienta")})
+    @JoinColumn(name = "id_klienta", nullable = false)
     private Klienci klient;
 
     public Rezerwacje(LocalDate data_od,

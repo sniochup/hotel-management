@@ -10,6 +10,7 @@ import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -41,9 +42,7 @@ public class TypyPokojow {
     private Long id_typu;
 
     @OneToMany(mappedBy = "typ_pokoju")
-    @Fetch(FetchMode.JOIN)
-    @JsonIgnore
-    private Collection<Pokoje> pokoj;
+    private Set<Pokoje> pokoj;
 
     @Column(
             name = "standard",

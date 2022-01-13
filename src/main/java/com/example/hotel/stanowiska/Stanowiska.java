@@ -11,6 +11,7 @@ import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -34,9 +35,7 @@ public class Stanowiska {
     private String nazwa;
 
     @OneToMany(mappedBy = "stanowisko")
-    @Fetch(FetchMode.JOIN)
-    @JsonIgnore
-    private Collection<Pracownicy> pracownik;
+    private Set<Pracownicy> pracownik;
 
     @Column(
             name = "placa_min",

@@ -1,5 +1,6 @@
 package com.example.hotel.pokoje;
 
+import com.example.hotel.rabaty.Rabaty;
 import com.example.hotel.rezerwacje.Rezerwacje;
 import com.example.hotel.typyPokojow.TypyPokojow;
 import lombok.Getter;
@@ -71,9 +72,7 @@ public class Pokoje {
         private Boolean czy_dostepny;
 
         @ManyToOne
-        @JoinTable(name = "typy_pokojow_pokoje",
-                joinColumns ={ @JoinColumn(name = "id_pokoju")},
-                inverseJoinColumns = {@JoinColumn(name = "id_typu")})
+        @JoinColumn(name = "id_typu", nullable = false)
         private TypyPokojow typ_pokoju;
 
         public Pokoje(Integer cena,

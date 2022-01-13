@@ -20,7 +20,7 @@ import java.util.Set;
 
 @Entity(name = "Uslugi")
 @Table(
-        name = "usugi",
+        name = "uslugi",
         uniqueConstraints = {
                 @UniqueConstraint(name = "id_uslugi_unique", columnNames = "id_uslugi")
         }
@@ -54,9 +54,7 @@ public class Uslugi {
     private String nazwa;
 
     @OneToMany(mappedBy = "usluga")
-    @Fetch(FetchMode.JOIN)
-    @JsonIgnore
-    private Collection<Pracownicy> pracownik;
+    private Set<Pracownicy> pracownik;
 
     @Column(
             name = "cena",

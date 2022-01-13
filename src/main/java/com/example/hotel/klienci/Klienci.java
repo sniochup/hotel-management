@@ -18,6 +18,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -51,15 +52,11 @@ public class Klienci implements UserDetails {
     private Long id_klienta;
 
     @ManyToOne
-    @JoinTable(name = "rabaty_klienci",
-            joinColumns ={ @JoinColumn(name = "id_klienta")},
-            inverseJoinColumns = {@JoinColumn(name = "id_rabatu")})
+    @JoinColumn(name = "id_rabatu")
     private Rabaty rabat;
 
     @OneToMany(mappedBy = "klient")
-    @Fetch(FetchMode.JOIN)
-    @JsonIgnore
-    private Collection<Rezerwacje> rezerwacja;
+    private Set<Rezerwacje> rezerwacje;
 
     @Column(
             name = "imie",

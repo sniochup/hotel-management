@@ -10,6 +10,7 @@ import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -35,14 +36,13 @@ public class Rabaty {
     )
     @Column(
             name = "id_rabatu",
-            updatable = false
+            updatable = false,
+            nullable = false
     )
     private Long id_rabatu;
 
     @OneToMany(mappedBy = "rabat")
-    @Fetch(FetchMode.JOIN)
-    @JsonIgnore
-    private Collection<Klienci> klient;
+    private Set<Klienci> klient;
 
     @Column(
             name = "wysokosc_rabatu",
