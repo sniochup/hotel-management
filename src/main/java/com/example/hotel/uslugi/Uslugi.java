@@ -53,8 +53,8 @@ public class Uslugi {
     )
     private String nazwa;
 
-    @OneToMany(mappedBy = "usluga")
-    private Set<Pracownicy> pracownik;
+    @ManyToMany(mappedBy = "uslugi")
+    private Set<Pracownicy> pracownicy = new HashSet<>();
 
     @Column(
             name = "cena",
