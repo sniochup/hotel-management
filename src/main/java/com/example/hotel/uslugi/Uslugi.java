@@ -2,15 +2,11 @@ package com.example.hotel.uslugi;
 
 import com.example.hotel.pracownicy.Pracownicy;
 import com.example.hotel.rezerwacje.Rezerwacje;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 

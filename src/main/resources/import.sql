@@ -84,3 +84,7 @@ INSERT INTO Wykupione_wyzywienie(id_pakietu, id_rezerwacji) VALUES (2, 1);
 -- Zamowione usługi
 INSERT Into Zamowione_uslugi(id_rezerwacji, id_uslugi) VALUES (1, 1);
 
+-- Wykonywane uslugi
+INSERT Into wykonywane_uslugi(id_pracownika, id_uslugi) VALUES (1, 1);
+
+

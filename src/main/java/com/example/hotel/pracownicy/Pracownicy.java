@@ -90,7 +90,12 @@ public class Pracownicy {
     )
     private Set<Uslugi> uslugi = new HashSet<>();
 
-    public Pracownicy(String imie, String nazwisko, LocalDate data_zatrudnienia, Integer placa_pod, Boolean czy_zatrudniony, Stanowiska stanowisko) {
+    public Pracownicy(String imie,
+                      String nazwisko,
+                      LocalDate data_zatrudnienia,
+                      Integer placa_pod,
+                      Boolean czy_zatrudniony,
+                      Stanowiska stanowisko) {
         this.imie = imie;
         this.nazwisko = nazwisko;
         this.data_zatrudnienia = data_zatrudnienia;
@@ -109,7 +114,7 @@ public class Pracownicy {
                 ", placa_pod=" + placa_pod +
                 ", czy_zatrudniony=" + czy_zatrudniony +
                 ", stanowisko=" + stanowisko +
-                ", usluga=" + uslugi +
+                ", uslugi=" + uslugi +
                 '}';
     }
 }
