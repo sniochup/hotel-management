@@ -1,7 +1,6 @@
 package com.example.hotel.klienci;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,26 +20,26 @@ public class KlientController {
         this.klientService = klientService;
     }
 
-    @GetMapping(path = "/lista")
+    @GetMapping(path = "/wyswietl")
     public String getKlients(Model model, Principal principal) {
 //        System.out.println(principal.getName());
 //        System.out.println(principal.toString());
         model.addAttribute("clientsAttributes", klientService.getKlients());
-        return "views/klienci";
+        return "views/klienci_wyswietl";
     }
 
-    @GetMapping(path = "/form")
+    @GetMapping(path = "/rejestracja")
     public String getForm(Model model) {
         model.addAttribute("clientsAttributes", new Klienci());
         model.addAttribute("formTitle", "Przykładowy formularz");
-        return "views/form";
+        return "views/rejestracja";
     }
 
-    @PostMapping(path = "/form")
+    @PostMapping(path = "/rejestracja")
     public String addProgrammingLanguageSubmit(@ModelAttribute Klienci klienci) {
         klienci.setPassword(passwordEncoder.encode(klienci.getPassword()));
         klientService.addNewKlient(klienci);
-        return "redirect:/klienci/lista";
+        return "redirect:/klienci/wyswietl";
     }
 
 //    @PostMapping

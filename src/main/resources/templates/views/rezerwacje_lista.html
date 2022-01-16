@@ -23,21 +23,25 @@
 
         <thead class="table-dark">
         <tr class="header-text-size">
-            <th>ID Klienta</th>
-            <th>Login</th>
-            <th>Imie</th>
-            <th>Nazwisko</th>
-            <th>Rok urodzenia</th>
+            <th>ID Rezerwacji</th>
+            <th>Data początku</th>
+            <th>Data końca</th>
+            <th>Status rezerwacji</th>
+            <th>Płatność</th>
+            <th>Status płatności</th>
+            <th>Login klienta</th>
         </tr>
         </thead>
 
         <tbody>
-        <tr th:each="k : ${clientsAttributes}">
-            <td th:text="${k.id_klienta}">ID</td>
-            <td th:text="${k.login}">rok_urodzenia</td>
-            <td th:text="${k.imie}">Imie</td>
-            <td th:text="${k.nazwisko}">Nazwisko</td>
-            <td th:text="${k.rok_urodzenia}">rok_urodzenia</td>
+        <tr th:each="r : ${rAttributes}">
+            <td th:text="${r.id_rezerwacji}">ID</td>
+            <td th:text="${r.data_od}">Data początku</td>
+            <td th:text="${r.data_do}">Data końca</td>
+            <td th:text="${r.status}">Status rezerwacji</td>
+            <td th:text="${r.platnosc}">Płatność</td>
+            <td th:text="${r.status_platnosci}">Status płatności</td>
+            <td th:text="${r.getKlient().getLogin()}">Login klienta</td>
         </tr>
         </tbody>
 

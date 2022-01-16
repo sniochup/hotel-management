@@ -18,10 +18,11 @@
 <body>
 <nav th:replace="fragments/navbar :: navbar"></nav>
 
-<main class="container-md mt-1" style="margin-top:80px">
+<div class="container-md" style="margin-top:80px">
     <h1 th:text="${formTitle}" class="text-center"></h1>
-    <form method="post"
-          th:action="@{/klienci/form}"
+    <form id="html5Form"
+          method="post"
+          th:action="@{/klienci/rejestracja}"
           class="w-50 mx-auto was-validated">
 
         <div class="form-group mt-4">
@@ -32,9 +33,12 @@
                    th:value="${clientsAttributes.login}"
                    type="text"
                    placeholder="Wprowadź login"
-                   required/>
+                   maxlength="20"
+                   minlength="4"
+                   required />
+
             <div class="valid-feedback">Zweryfikowano</div>
-            <div class="invalid-feedback">Pole wymagane!</div>
+            <div class="invalid-feedback">Pole wymagane! </div>
         </div>
 
         <div class="form-group mt-4">
@@ -45,7 +49,10 @@
                    th:value="${clientsAttributes.imie}"
                    type="text"
                    placeholder="Wprowadź imie"
+                   maxlength="20"
+                   minlength="3"
                    required/>
+
             <div class="valid-feedback">Zweryfikowano</div>
             <div class="invalid-feedback">Pole wymagane!</div>
         </div>
@@ -58,6 +65,8 @@
                    th:value="${clientsAttributes.nazwisko}"
                    type="text"
                    placeholder="Wprowadź nazwisko"
+                   maxlength="20"
+                   minlength="3"
                    required/>
             <div class="valid-feedback">Zweryfikowano</div>
             <div class="invalid-feedback">Pole wymagane!</div>
@@ -84,6 +93,8 @@
                    th:value="${clientsAttributes.password}"
                    type="password"
                    placeholder="Wprowadź hasło"
+                   maxlength="20"
+                   minlength="3"
                    required/>
             <div class="valid-feedback">Zweryfikowano</div>
             <div class="invalid-feedback">Pole wymagane!</div>
@@ -95,7 +106,7 @@
         </div>
 
     </form>
-</main>
+</div>
 
 </body>
 </html>
