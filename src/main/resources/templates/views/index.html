@@ -2,35 +2,85 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>List</title>
+    <title>Welcome page!</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
     <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
-
 </head>
-<body>
+
 <nav th:replace="fragments/navbar :: navbar"></nav>
+<body>
 
-<main class="container-sm mt-1">
-    <table class="table table-striped">
+<div id="demo" class="carousel slide" data-bs-ride="carousel" style="margin-top:65px">
 
-        <tr class="header-text-size">
-            <th>ID Klienta</th>
-            <th>Imie</th>
-            <th>Nazwisko</th>
-            <th>rok_urodzenia</th>
-            <th>login</th>
-        </tr>
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
+        <button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
+        <button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>
+        <button type="button" data-bs-target="#demo" data-bs-slide-to="3"></button>
+    </div>
 
-        <tr th:each="k : ${clientsAttributes}" class="table-text-size">
-            <td th:text="${k.id_klienta}">ID</td>
-            <td th:text="${k.imie}">Imie</td>
-            <td th:text="${k.nazwisko}">Nazwisko</td>
-            <td th:text="${k.rok_urodzenia}">rok_urodzenia</td>
-            <td th:text="${k.login}">rok_urodzenia</td>
-        </tr>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img th:src="@{/img/main2.jpg}" alt="hotel1" class="d-block w-100">
+            <div class="carousel-caption">
+                <h3>Witamy!</h3>
+                <p>Zostań z nami na dłużej</p>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img th:src="@{/img/main1.jpg}" alt="hotel2" class="d-block w-100">
+            <div class="carousel-caption">
+                <h3>Witamy!</h3>
+                <p>Zostań z nami na dłużej</p>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img th:src="@{/img/main3.jpg}" alt="hotel3" class="d-block w-100">
+            <div class="carousel-caption">
+                <h3>Witamy!</h3>
+                <p>Zostań z nami na dłużej</p>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img th:src="@{/img/main4.jpg}" alt="hotel4" class="d-block w-100">
+            <div class="carousel-caption">
+                <h3>Witamy!</h3>
+                <p>Zostań z nami na dłużej</p>
+            </div>
+        </div>
+    </div>
 
-    </table>
-</main>
+    <button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+    </button>
+
+    <button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+    </button>
+</div>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-sm-4">
+            <h3>Column 1</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
+            <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
+        </div>
+
+        <div class="col-sm-4">
+            <h3>Column 2</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
+            <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
+        </div>
+
+        <div class="col-sm-4">
+            <h3>Column 3</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
+            <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>

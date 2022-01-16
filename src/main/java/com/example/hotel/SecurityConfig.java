@@ -10,6 +10,11 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+
+import java.security.Principal;
 
 @Configuration
 @EnableWebSecurity
@@ -41,11 +46,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/user").hasAnyRole("USER", "ADMIN")
-                .antMatchers("/").permitAll()
+//                .antMatchers("/user").hasAnyRole("USER", "ADMIN")
                 .anyRequest()
-                .authenticated().and()
+                .authenticated()
+                .and()
                 .formLogin();
+//                .loginPage("/login")
+//                .permitAll();
     }
 
     @Bean

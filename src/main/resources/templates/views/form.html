@@ -6,38 +6,94 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
     <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css"/>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+
+    <script type="text/javascript" th:src="@{/js/file.js}"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/file.css}"/>
+
 </head>
 <body>
 <nav th:replace="fragments/navbar :: navbar"></nav>
 
-<main class="container-md mt-1">
+<main class="container-md mt-1" style="margin-top:80px">
     <h1 th:text="${formTitle}" class="text-center"></h1>
     <form method="post"
-          th:action="@{/}"
-          class="w-50 mx-auto">
+          th:action="@{/klienci/form}"
+          class="w-50 mx-auto was-validated">
+
         <div class="form-group mt-4">
-            <label for="name" class="form-label">Imie:</label>
-            <input id="name"
+            <label for="login" class="form-label">Login:</label>
+            <input id="login"
                    class="form-control"
-                   th:name="name"
+                   th:name="login"
                    th:value="${clientsAttributes.login}"
                    type="text"
+                   placeholder="Wprowadź login"
                    required/>
+            <div class="valid-feedback">Zweryfikowano</div>
+            <div class="invalid-feedback">Pole wymagane!</div>
         </div>
 
         <div class="form-group mt-4">
-            <label for="rating" class="form-label">Ocena:</label>
-            <input id="rating"
+            <label for="imie" class="form-label">Imie:</label>
+            <input id="imie"
                    class="form-control"
-                   step="0.1"
-                   th:name="rating"
+                   th:name="imie"
                    th:value="${clientsAttributes.imie}"
-                   type="number"/>
+                   type="text"
+                   placeholder="Wprowadź imie"
+                   required/>
+            <div class="valid-feedback">Zweryfikowano</div>
+            <div class="invalid-feedback">Pole wymagane!</div>
         </div>
+
+        <div class="form-group mt-4">
+            <label for="nazwisko" class="form-label">Nazwisko:</label>
+            <input id="nazwisko"
+                   class="form-control"
+                   th:name="nazwisko"
+                   th:value="${clientsAttributes.nazwisko}"
+                   type="text"
+                   placeholder="Wprowadź nazwisko"
+                   required/>
+            <div class="valid-feedback">Zweryfikowano</div>
+            <div class="invalid-feedback">Pole wymagane!</div>
+        </div>
+
+        <div class="form-group mt-4 date">
+            <label for="roku" class="form-label">Rok urodzenia:</label>
+            <input id="roku"
+                   class="form-control"
+                   th:name="rok_urodzenia"
+                   th:value="${clientsAttributes.rok_urodzenia}"
+                   type="date"
+                   placeholder="Wprowadź rok urodzenia"
+                   required/>
+            <div class="valid-feedback">Zweryfikowano</div>
+            <div class="invalid-feedback">Pole wymagane!</div>
+        </div>
+
+        <div class="form-group mt-4">
+            <label for="haslo" class="form-label">Hasło:</label>
+            <input id="haslo"
+                   class="form-control"
+                   th:name="password"
+                   th:value="${clientsAttributes.password}"
+                   type="password"
+                   placeholder="Wprowadź hasło"
+                   required/>
+            <div class="valid-feedback">Zweryfikowano</div>
+            <div class="invalid-feedback">Pole wymagane!</div>
+        </div>
+
         <div class="d-flex justify-content-between align-items-center mt-4">
-            <input type="reset" class="btn btn-warning mt-2 col-md-5" value="Reset"/>
-            <input type="submit" class="btn btn-warning mt-2 col-md-5" value="Zapisz"/>
+            <input type="reset" class="btn btn-dark mt-2 col-md-5" value="Reset"/>
+            <input type="submit" class="btn btn-dark mt-2 col-md-5" value="Zapisz"/>
         </div>
+
     </form>
 </main>
 

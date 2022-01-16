@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.sql.Date;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.List;
@@ -23,14 +24,28 @@ public class KlientService implements UserDetailsService {
         this.klientRepository = klientRepository;
     }
 
-    public List<Klienci> getKlient() {
+    public List<Klienci> getKlients() {
         return klientRepository.findAll();
     }
 
+    public List<Klienci> getKlientsSortByImie() {
+        return klientRepository.findAll(Sort.by(Sort.Direction.ASC, "imie"));
+    }
+
+    public List<Klienci> getKlientsSortByImieNazwisko() {
+        return klientRepository.findAll(Sort.by(Sort.Direction.ASC, "nazwisko"));
+    }
+
+    public List<Klienci> getKlientSortByLogin() {
+        return klientRepository.findAll(Sort.by(Sort.Direction.ASC, "login"));
+    }
+
     public void addNewKlient(Klienci klient) {
-        if (Period.between(klient.getRok_urodzenia(), LocalDate.now()).getYears() < 18) {
+        LocalDate localDate = (klient.getRok_urodzenia()).toLocalDate();
+        if (Period.between(localDate, LocalDate.now()).getYears() < 18) {
             throw new IllegalStateException("Klient too young!");
         }
+
         klientRepository.save(klient);
     }
 

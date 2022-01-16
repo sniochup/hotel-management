@@ -1,5 +1,7 @@
 package com.example.hotel.klienci;
 
+import com.example.hotel.rabaty.Rabaty;
+import com.example.hotel.rezerwacje.Rezerwacje;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -7,15 +9,10 @@ import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
-import com.example.hotel.rabaty.Rabaty;
-import com.example.hotel.rezerwacje.Rezerwacje;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.sql.Date;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Set;
@@ -77,7 +74,7 @@ public class Klienci implements UserDetails {
             nullable = false,
             columnDefinition = "date"
     )
-    private LocalDate rok_urodzenia;
+    private Date rok_urodzenia;
 
     @Column(
             name = "login",
@@ -92,9 +89,10 @@ public class Klienci implements UserDetails {
     )
     private String password;
 
+
     public Klienci(String imie,
                    String nazwisko,
-                   LocalDate rok_urodzenia,
+                   Date rok_urodzenia,
                    String login,
                    String password) {
 
