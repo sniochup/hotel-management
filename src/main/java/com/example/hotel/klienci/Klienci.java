@@ -107,7 +107,7 @@ public class Klienci implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         SimpleGrantedAuthority authority =
-                new SimpleGrantedAuthority("USER");
+                new SimpleGrantedAuthority("KLIENT");
         return Collections.singletonList(authority);
     }
 

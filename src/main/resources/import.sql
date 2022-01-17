@@ -1,3 +1,5 @@
+CREATE EXTENSION IF NOT EXISTS pgcrypto;
+
 -- Klienci
 INSERT INTO klienci(id_klienta, imie, nazwisko, rok_urodzenia, login, password) VALUES (nextval('klient_sequence'), 'Julia', 'Tokłowicz', TO_DATE('2000-05-08', 'YYYY-MM-DD'), 'julia', crypt('julia', gen_salt('bf')));
 INSERT INTO klienci(id_klienta, imie, nazwisko, rok_urodzenia, login, password) VALUES (nextval('klient_sequence'), 'Paweł', 'Śnioszek', TO_DATE('2000-06-25', 'YYYY-MM-DD'), 'pawel', crypt('pawel', gen_salt('bf')));
@@ -56,9 +58,9 @@ INSERT INTO Stanowiska(nazwa, placa_min, placa_max) VALUES ('recepcjonista', 200
 INSERT INTO Stanowiska(nazwa, placa_min, placa_max) VALUES ('masazysta', 2000, 3000);
 
 -- Pracownicy
-INSERT INTO Pracownicy (id_pracownika, imie, nazwisko, data_zatrudnienia, placa_pod, nazwa, czy_zatrudniony) VALUES (nextval('pracownicy_sequence'), 'Anna', 'Paruszewska', TO_DATE('2021-01-01', 'YYYY-MM-DD'), 1500, 'sprzatacz', '1');
-INSERT INTO Pracownicy (id_pracownika, imie, nazwisko, data_zatrudnienia, placa_pod, nazwa, czy_zatrudniony) VALUES (nextval('pracownicy_sequence'), 'Magdalena', 'Slowiakowska', TO_DATE('2019-01-01', 'YYYY-MM-DD'), 2000, 'recepcjonista', '0');
-INSERT INTO Pracownicy (id_pracownika, imie, nazwisko, data_zatrudnienia, placa_pod, nazwa, czy_zatrudniony) VALUES (nextval('pracownicy_sequence'), 'Jan', 'Konieczny', TO_DATE('2020-08-09', 'YYYY-MM-DD'), 2000, 'masazysta', '1');
+INSERT INTO Pracownicy (id_pracownika, imie, nazwisko, data_zatrudnienia, placa_pod, nazwa, czy_zatrudniony, login, password) VALUES (nextval('pracownicy_sequence'), 'Anna', 'Paruszewska', TO_DATE('2021-01-01', 'YYYY-MM-DD'), 1500, 'sprzatacz', '1', 'anna', crypt('anna', gen_salt('bf')));
+INSERT INTO Pracownicy (id_pracownika, imie, nazwisko, data_zatrudnienia, placa_pod, nazwa, czy_zatrudniony, login, password) VALUES (nextval('pracownicy_sequence'), 'Magdalena', 'Slowiakowska', TO_DATE('2019-01-01', 'YYYY-MM-DD'), 2000, 'recepcjonista', '0', 'Magdalena', crypt('Magdalena', gen_salt('bf')));
+INSERT INTO Pracownicy (id_pracownika, imie, nazwisko, data_zatrudnienia, placa_pod, nazwa, czy_zatrudniony, login, password) VALUES (nextval('pracownicy_sequence'), 'Jan', 'Konieczny', TO_DATE('2020-08-09', 'YYYY-MM-DD'), 2000, 'masazysta', '1', 'janek', crypt('janek', gen_salt('bf')));
 
 -- Rabaty
 INSERT INTO Rabaty(id_rabatu, wysokosc_rabatu, typ) VALUES (nextval('rabaty_sequence'), 5, 'Bronze');

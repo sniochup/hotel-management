@@ -22,16 +22,16 @@
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse" id="Navbar">
-      <ul class="navbar-nav">
+        <div class="collapse navbar-collapse" id="Navbar">
+            <ul class="navbar-nav ms-auto">
 
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Klienci</a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" th:href="@{/klienci/wyswietl}">Wyświetl</a></li>
-            <li><a class="dropdown-item" th:href="@{/klienci/rejestracja}">Rejestracja</a></li>
-          </ul>
-        </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Klienci</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" th:href="@{/klienci/wyswietl}">Wyświetl</a></li>
+                    </ul>
+                </li>
+
 
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Rezerwacje</a>
@@ -97,11 +97,7 @@
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" th:href="@{/login}">Login</a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link" th:href="@{/logout}">Logout</a>
+          <a class="nav-link" th:href="@{/logout}">Wyloguj</a>
         </li>
 
       </ul>

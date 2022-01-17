@@ -2,12 +2,18 @@ package com.example.hotel.pracownicy;
 
 import com.example.hotel.stanowiska.Stanowiska;
 import com.example.hotel.uslugi.Uslugi;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -22,8 +28,8 @@ import java.util.Set;
                 @UniqueConstraint(name = "id_pracownika_unique", columnNames = "id_pracownika")
         }
 )
-
-public class Pracownicy {
+@EqualsAndHashCode
+public class Pracownicy implements UserDetails {
 
     @Id
     @SequenceGenerator(
@@ -90,18 +96,35 @@ public class Pracownicy {
     )
     private Set<Uslugi> uslugi = new HashSet<>();
 
+    @Column(
+            name = "login",
+            nullable = false,
+            columnDefinition = "VARCHAR(20)"
+    )
+    private String login;
+
+    @Column(
+            name = "password",
+            nullable = false
+    )
+    private String password;
+
     public Pracownicy(String imie,
                       String nazwisko,
                       LocalDate data_zatrudnienia,
                       Integer placa_pod,
                       Boolean czy_zatrudniony,
-                      Stanowiska stanowisko) {
+                      Stanowiska stanowisko,
+                      String login,
+                      String password) {
         this.imie = imie;
         this.nazwisko = nazwisko;
         this.data_zatrudnienia = data_zatrudnienia;
         this.placa_pod = placa_pod;
         this.czy_zatrudniony = czy_zatrudniony;
         this.stanowisko = stanowisko;
+        this.login = login;
+        this.password = password;
     }
 
     @Override
@@ -114,7 +137,39 @@ public class Pracownicy {
                 ", placa_pod=" + placa_pod +
                 ", czy_zatrudniony=" + czy_zatrudniony +
                 ", stanowisko=" + stanowisko +
-                ", uslugi=" + uslugi +
+                ", login='" + login + '\'' +
                 '}';
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        SimpleGrantedAuthority authority =
+                new SimpleGrantedAuthority("PRACOWNIK");
+        return Collections.singletonList(authority);
+    }
+
+    @Override
+    public String getUsername() {
+        return login;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 }
