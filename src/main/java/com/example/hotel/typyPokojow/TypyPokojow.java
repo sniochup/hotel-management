@@ -87,7 +87,6 @@ public class TypyPokojow {
     public String toString() {
         return "TypyPokojow{" +
                 "id_typu=" + id_typu +
-                ", pokoj=" + pokoj +
                 ", standard='" + standard + '\'' +
                 ", czy_klima=" + czy_klima +
                 ", czy_balkon=" + czy_balkon +
