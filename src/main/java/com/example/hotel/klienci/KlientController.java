@@ -13,7 +13,6 @@ import java.security.Principal;
 public class KlientController {
 
     private final KlientService klientService;
-    BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     @Autowired
     public KlientController(KlientService klientService) {
@@ -21,25 +20,9 @@ public class KlientController {
     }
 
     @GetMapping(path = "/wyswietl")
-    public String getKlients(Model model, Principal principal) {
-//        System.out.println(principal.getName());
-//        System.out.println(principal.toString());
+    public String getKlients(Model model) {
         model.addAttribute("clientsAttributes", klientService.getKlients());
         return "views/klienci_wyswietl";
-    }
-
-    @GetMapping(path = "/rejestracja")
-    public String getForm(Model model) {
-        model.addAttribute("clientsAttributes", new Klienci());
-        model.addAttribute("formTitle", "Przykładowy formularz");
-        return "views/rejestracja";
-    }
-
-    @PostMapping(path = "/rejestracja")
-    public String addProgrammingLanguageSubmit(@ModelAttribute Klienci klienci) {
-        klienci.setPassword(passwordEncoder.encode(klienci.getPassword()));
-        klientService.addNewKlient(klienci);
-        return "redirect:/klienci/wyswietl";
     }
 
 //    @PostMapping

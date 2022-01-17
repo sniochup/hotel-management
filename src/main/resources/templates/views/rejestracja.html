@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Form</title>
+    <title>Rejestracja</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
     <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
@@ -15,14 +15,26 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/file.css}"/>
 
 </head>
-<body>
-<nav th:replace="fragments/navbar :: navbar"></nav>
+<body style="background-color: #F4EFEF;">
+<nav th:replace="fragments/navbarLogin :: navbarLogin"></nav>
 
-<div class="container-md" style="margin-top:80px">
+<div class="container-md" style="margin-top:80px; margin-bottom: 50px">
+
+    <img class="rounded mx-auto d-block" th:src="@{/img/logo.png}" width="150" height="150">
+
     <h1 th:text="${formTitle}" class="text-center"></h1>
+
+    <div th:if="${param.wiek}" class="alert alert-danger w-50 mx-auto">
+        Minimalnt wiek klienta to 18 lat!
+    </div>
+
+    <div th:if="${param.login}" class="alert alert-danger w-50 mx-auto">
+        Login zajęty!
+    </div>
+
     <form id="html5Form"
           method="post"
-          th:action="@{/klienci/rejestracja}"
+          th:action="@{/rejestracja}"
           class="w-50 mx-auto was-validated">
 
         <div class="form-group mt-4">
@@ -94,7 +106,7 @@
                    type="password"
                    placeholder="Wprowadź hasło"
                    maxlength="20"
-                   minlength="3"
+                   minlength="4"
                    required/>
             <div class="valid-feedback">Zweryfikowano</div>
             <div class="invalid-feedback">Pole wymagane!</div>

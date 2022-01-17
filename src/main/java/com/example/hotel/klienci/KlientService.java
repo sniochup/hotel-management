@@ -1,6 +1,9 @@
 package com.example.hotel.klienci;
 
+import com.example.hotel.pracownicy.PracownicyRepository;
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -8,6 +11,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import javax.xml.bind.ValidationException;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.Period;
@@ -18,10 +22,12 @@ import java.util.Objects;
 public class KlientService implements UserDetailsService {
 
     private final KlientRepository klientRepository;
+    private final PracownicyRepository pracownicyRepository;
 
     @Autowired
-    public KlientService(KlientRepository klientRepository) {
+    public KlientService(KlientRepository klientRepository, PracownicyRepository pracownicyRepository) {
         this.klientRepository = klientRepository;
+        this.pracownicyRepository = pracownicyRepository;
     }
 
     public List<Klienci> getKlients() {
@@ -45,7 +51,9 @@ public class KlientService implements UserDetailsService {
         if (Period.between(localDate, LocalDate.now()).getYears() < 18) {
             throw new IllegalStateException("Klient too young!");
         }
-
+        else if (klientRepository.findByLogin(klient.getLogin()).isPresent() || pracownicyRepository.findByLogin(klient.getLogin()).isPresent()) {
+            throw new DataIntegrityViolationException("Login exist!");
+        }
         klientRepository.save(klient);
     }
 

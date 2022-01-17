@@ -4,7 +4,3 @@ $(document).ready(function () {
 });
 
 $('.datepicker').datepicker();
-
-// $(document).ready(function() {
-//     $('#html5Form').bootstrapValidator();
-// });

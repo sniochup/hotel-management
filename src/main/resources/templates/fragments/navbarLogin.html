@@ -9,7 +9,7 @@
 </head>
 
 <body>
-<nav th:fragment="navbar"
+<nav th:fragment="navbarLogin"
      class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
 
     <div class="container-fluid">
@@ -25,22 +25,12 @@
         <div class="collapse navbar-collapse" id="Navbar">
             <ul class="navbar-nav ms-auto">
 
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Klienci</a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" th:href="@{/klienci/wyswietl}">Wyświetl</a></li>
-                    </ul>
-                </li>
-
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Rezerwacje</a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" th:href="@{/rezerwacje/wyswietl}">Wyświetl</a></li>
-                    </ul>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/login}">Logowanie</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/logout}">Wyloguj</a>
+                    <a class="nav-link" th:href="@{/rejestracja}">Rejestracja</a>
                 </li>
 
             </ul>
