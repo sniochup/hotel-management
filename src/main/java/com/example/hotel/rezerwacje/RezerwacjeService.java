@@ -24,7 +24,16 @@ public class RezerwacjeService {
     }
 
     public List<Rezerwacje> getRezerwacje() {
-        System.out.println(rezerwacjeRepository.findAll().get(0).getKlient().getLogin());
+//        System.out.println(rezerwacjeRepository.findAll().get(0).getKlient().getLogin());
         return rezerwacjeRepository.findAll();
     }
+
+    public List<Rezerwacje> getRezerwacjeID(String login) {
+        return rezerwacjeRepository.findAllByKlient(login);
+    }
+
+//    public List<Rezerwacje> getPokoje() {
+//        System.out.println(rezerwacjeRepository.findByPokoje());
+//        return rezerwacjeRepository.findByPokoje();
+//    }
 }

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div th:fragment="rezerwacjeLista"
+     class="container" style="margin-top:80px">
+    <table id="myTable" class="table table-striped display">
+
+        <thead class="table-dark">
+        <tr class="header-text-size">
+            <th>ID Rezerwacji</th>
+            <th>Data początku</th>
+            <th>Data końca</th>
+            <th>Status rezerwacji</th>
+            <th>Płatność</th>
+            <th>Status płatności</th>
+            <th>Login klienta</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="r : ${rAttributes}">
+            <td th:text="${r.id_rezerwacji}">ID</td>
+            <td th:text="${r.data_od}">Data początku</td>
+            <td th:text="${r.data_do}">Data końca</td>
+            <td th:text="${r.status}">Status rezerwacji</td>
+            <td th:text="${r.platnosc}">Płatność</td>
+            <td th:text="${r.status_platnosci}">Status płatności</td>
+            <td th:text="${r.getKlient().getLogin()}">Login klienta</td>
+        </tr>
+        </tbody>
+
+    </table>
+</div>
+
+</body>
+</html>
