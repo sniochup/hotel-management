@@ -69,12 +69,18 @@ INSERT INTO Rabaty(id_rabatu, wysokosc_rabatu, typ) VALUES (nextval('rabaty_sequ
 
 -- Usługi
 INSERT INTO Uslugi (id_uslugi, nazwa, cena) VALUES (nextval('uslugi_sequence'), 'masaz', 199.99);
+INSERT INTO Uslugi (id_uslugi, nazwa, cena) VALUES (nextval('uslugi_sequence'), 'trener osobisty', 150);
 
 -- Rezerwacja
 INSERT INTO Rezerwacje(id_rezerwacji, data_od, data_do, status, status_platnosci, id_klienta) VALUES (nextval('rezerwacje_sequence'), TO_DATE('12-12-2022', 'DD-MM-YYYY'), TO_DATE('20-12-2022', 'DD-MM-YYYY'), 'Przyjeta', 'Oczekuje płatności', 1);
+INSERT INTO Rezerwacje(id_rezerwacji, data_od, data_do, status, status_platnosci, id_klienta) VALUES (nextval('rezerwacje_sequence'), TO_DATE('01-01-2021', 'DD-MM-YYYY'), TO_DATE('05-01-2021', 'DD-MM-YYYY'), 'Odwolana', 'Oczekuje płatności', 2);
+INSERT INTO Rezerwacje(id_rezerwacji, data_od, data_do, status, status_platnosci, id_klienta) VALUES (nextval('rezerwacje_sequence'), TO_DATE('02-02-2020', 'DD-MM-YYYY'), TO_DATE('06-02-2020', 'DD-MM-YYYY'), 'Przyjeta', 'Oplacona', 1);
+INSERT INTO Rezerwacje(id_rezerwacji, data_od, data_do, status, status_platnosci, id_klienta) VALUES (nextval('rezerwacje_sequence'), TO_DATE('03-03-2019', 'DD-MM-YYYY'), TO_DATE('08-03-2019', 'DD-MM-YYYY'), 'Zamknieta', 'Oplacona', 2);
 
 -- Zarezerwowane pokoje
 INSERT INTO Zarezerwowane_pokoje (id_pokoju, id_rezerwacji) VALUES (1, 1);
+INSERT INTO Zarezerwowane_pokoje (id_pokoju, id_rezerwacji) VALUES (4, 1);
+INSERT INTO Zarezerwowane_pokoje (id_pokoju, id_rezerwacji) VALUES (5, 1);
 
 -- Zarezerwowane miejsca parkingowe
 INSERT INTO Zarezerw_miejsca_parkingowe(id_miejsca, id_rezerwacji) VALUES (1, 1);
@@ -82,11 +88,15 @@ INSERT INTO Zarezerw_miejsca_parkingowe(id_miejsca, id_rezerwacji) VALUES (4, 1)
 
 -- Wykupione wyzywienie
 INSERT INTO Wykupione_wyzywienie(id_pakietu, id_rezerwacji) VALUES (2, 1);
+-- INSERT INTO Wykupione_wyzywienie(id_pakietu, id_rezerwacji) VALUES (1, 1);
+INSERT INTO Wykupione_wyzywienie(id_pakietu, id_rezerwacji) VALUES (1, 1);
 
 -- Zamowione usługi
 INSERT Into Zamowione_uslugi(id_rezerwacji, id_uslugi) VALUES (1, 1);
+INSERT Into Zamowione_uslugi(id_rezerwacji, id_uslugi) VALUES (1, 2);
 
 -- Wykonywane uslugi
 INSERT Into wykonywane_uslugi(id_pracownika, id_uslugi) VALUES (1, 1);
+
 
 

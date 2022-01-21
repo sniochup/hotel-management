@@ -1,12 +1,15 @@
 package com.example.hotel.klienci;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.Objects;
 
 @Controller
 @RequestMapping(path = "/klienci")
@@ -20,10 +23,18 @@ public class KlientController {
     }
 
     @GetMapping(path = "/wyswietl")
-    public String getKlients(Model model) {
+    public String getKlients(Model model, Authentication authentication) {
+
+        if (Objects.equals(authentication.getAuthorities().iterator().next().toString(), "KLIENT")) {
+//            System.out.println(klientService.getKlientByLogin(authentication.getName()).get());
+            model.addAttribute("clientsAttributes", klientService.getKlientByLogin(authentication.getName()).get());
+            return "views/klient/mojeKonto";
+        }
+
         model.addAttribute("clientsAttributes", klientService.getKlients());
         return "views/klienci_wyswietl";
     }
+
 
 //    @PostMapping
 //    public void registerNewKlient(@RequestBody Klienci klient) {

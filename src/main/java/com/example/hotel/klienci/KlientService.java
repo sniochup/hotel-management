@@ -17,6 +17,7 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class KlientService implements UserDetailsService {
@@ -32,6 +33,10 @@ public class KlientService implements UserDetailsService {
 
     public List<Klienci> getKlients() {
         return klientRepository.findAll();
+    }
+
+    public Optional<Klienci> getKlientByLogin(String login) {
+        return klientRepository.findByLogin(login);
     }
 
     public List<Klienci> getKlientsSortByImie() {
