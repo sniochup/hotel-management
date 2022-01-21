@@ -23,7 +23,6 @@ public class MiejscaParkingoweService {
     }
 
     public List<MiejscaParkingowe> getMiejscaParkingowe() {
-        System.out.println(miejscaParkingoweRepository.findAll().get(0));
         return miejscaParkingoweRepository.findAll();
     }
 }

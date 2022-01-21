@@ -47,9 +47,9 @@ public class Rabaty {
     @Column(
             name = "wysokosc_rabatu",
             nullable = false,
-            columnDefinition = "NUMERIC(6,2)"
+            columnDefinition = "NUMERIC(3)"
     )
-    private Float wysokosc_rabatu;
+    private Integer wysokosc_rabatu;
 
     @Column(
             name = "typ",
@@ -58,7 +58,7 @@ public class Rabaty {
     )
     private String typ;
 
-    public Rabaty(Float wysokosc_rabatu,
+    public Rabaty(Integer wysokosc_rabatu,
                   String typ) {
         this.id_rabatu = id_rabatu;
         this.wysokosc_rabatu = wysokosc_rabatu;

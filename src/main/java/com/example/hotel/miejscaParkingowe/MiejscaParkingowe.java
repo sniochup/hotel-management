@@ -43,7 +43,7 @@ public class MiejscaParkingowe {
             nullable = false,
             columnDefinition = "NUMERIC(6, 2)"
     )
-    private Integer cena;
+    private Float cena;
 
     @Column(
             name = "typ",
@@ -55,7 +55,7 @@ public class MiejscaParkingowe {
     @ManyToMany(mappedBy = "miejsca_parkingowe")
     private Set<Rezerwacje> rezerwacje = new HashSet<>();
 
-    public MiejscaParkingowe(Integer cena,
+    public MiejscaParkingowe(Float cena,
                               String typ) {
         this.id_miejsca = id_miejsca;
         this.cena = cena;

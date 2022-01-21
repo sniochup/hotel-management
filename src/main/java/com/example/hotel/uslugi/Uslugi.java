@@ -57,9 +57,9 @@ public class Uslugi {
             nullable = false,
             columnDefinition = "NUMERIC(6, 2)"
     )
-    private Integer cena;
+    private Float cena;
 
-    public Uslugi(String nazwa, Integer cena) {
+    public Uslugi(String nazwa, Float cena) {
         this.id_uslugi = id_uslugi;
         this.nazwa = nazwa;
         this.cena = cena;

@@ -36,6 +36,9 @@
                    th:name="cena"
                    th:value="${miejscaParkingoweAttributes.cena}"
                    type="number"
+                   step="0.01"
+                   max="9999.99"
+                   min="0"
                    placeholder="Wprowadź cenę miejsca parkingowego"
                    required/>
 
@@ -45,13 +48,16 @@
 
         <div class="form-group mt-4">
             <label for="typ" class="form-label">Typ miejsca parkingowego:</label>
-            <input id = "typ"
-                   class="form-control"
+            <select id = "typ"
+                   class="form-select"
                    th:name="typ"
                    th:value="${miejscaParkingoweAttributes.typ}"
                    type="text"
                    placeholder="Wprowadź typ miejsca parkingowego"
-                   required/>
+                   required>
+                <option>normalne</option>
+                <option>niepełnosprawni</option>
+            </select>
 
             <div class="valid-feedback">Zweryfikowano</div>
             <div class="invalid-feedback">Pole wymagane! </div>

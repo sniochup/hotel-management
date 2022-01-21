@@ -36,6 +36,8 @@
                    th:name="typ"
                    th:value="${pakietyWyzywienAttributes.typ}"
                    type="text"
+                   maxlength="30"
+                   minlength="3"
                    placeholder="Wprowadź typ pakietu"
                    required />
 
@@ -50,6 +52,9 @@
                    th:name="cena_dzien"
                    th:value="${pakietyWyzywienAttributes.cena_dzien}"
                    type="number"
+                   step="0.01"
+                   max="9999.99"
+                   min="0"
                    placeholder="Wprowadź cenę pakietu"
                    required/>
 

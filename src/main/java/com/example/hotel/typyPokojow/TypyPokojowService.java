@@ -22,7 +22,7 @@ public class TypyPokojowService {
     }
 
     public List<TypyPokojow> getTypyPokojow() {
-        System.out.println(typyPokojowRepository.findAll().get(0));
+//        System.out.println(typyPokojowRepository.findAll().get(0));
         return typyPokojowRepository.findAll();
     }
 }

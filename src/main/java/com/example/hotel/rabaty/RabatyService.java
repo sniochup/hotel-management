@@ -22,7 +22,7 @@ public class RabatyService {
     }
 
     public List<Rabaty> getRabaty() {
-        System.out.println(rabatyRepository.findAll().get(0));
+//        System.out.println(rabatyRepository.findAll().get(0));
         return rabatyRepository.findAll();
     }
 }

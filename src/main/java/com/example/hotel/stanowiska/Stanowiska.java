@@ -42,16 +42,18 @@ public class Stanowiska {
             nullable = false,
             columnDefinition = "NUMERIC(6, 2)"
     )
-    private Integer placa_min;
+    private Float placa_min;
 
     @Column(
             name = "placa_max",
             nullable = false,
             columnDefinition = "NUMERIC(6, 2)"
     )
-    private Integer placa_max;
+    private Float placa_max;
 
-    public Stanowiska(String nazwa, Integer placa_min, Integer placa_max) {
+    public Stanowiska(String nazwa,
+                      Float placa_min,
+                      Float placa_max) {
         this.nazwa = nazwa;
         this.placa_min = placa_min;
         this.placa_max = placa_max;

@@ -20,7 +20,6 @@ public class PakietyWyzywienService {
     }
 
     public List<PakietyWyzywien> getPakietyWyzywien() {
-        System.out.println(pakietyWyzywienRepository.findAll().get(0));
         return pakietyWyzywienRepository.findAll();
     }
 }

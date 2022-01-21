@@ -52,13 +52,13 @@ public class PakietyWyzywien {
             nullable = false,
             columnDefinition = "NUMERIC(6, 2)"
     )
-    private Integer cena_dzien;
+    private Float cena_dzien;
 
     @ManyToMany(mappedBy = "pakiety_wyzywien")
     private Set<Rezerwacje> rezerwacje = new HashSet<>();
 
 
-    public PakietyWyzywien(String typ, Integer cena_dzien) {
+    public PakietyWyzywien(String typ, Float cena_dzien) {
         this.id_pakietu = id_pakietu;
         this.typ = typ;
         this.cena_dzien = cena_dzien;

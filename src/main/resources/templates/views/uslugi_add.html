@@ -36,6 +36,8 @@
                    th:name="nazwa"
                    th:value="${uslugiAttributes.nazwa}"
                    type="text"
+                   maxlength="30"
+                   minlength="3"
                    placeholder="Wprowadź nazwę usługi"
                    required />
 
@@ -50,6 +52,9 @@
                    th:name="cena"
                    th:value="${uslugiAttributes.cena}"
                    type="number"
+                   step="0.01"
+                   max="9999.99"
+                   min="0"
                    placeholder="Wprowadź cenę usługi"
                    required/>
 
