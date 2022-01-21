@@ -11,11 +11,9 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.time.LocalDate;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.sql.Date;
+import java.util.*;
+
 
 @Getter
 @Setter
@@ -66,14 +64,14 @@ public class Pracownicy implements UserDetails {
             nullable = false,
             columnDefinition = "DATE"
     )
-    private LocalDate data_zatrudnienia;
+    private Date data_zatrudnienia;
 
     @Column(
             name = "placa_pod",
             nullable = false,
             columnDefinition = "NUMERIC(6, 2)"
     )
-    private Integer placa_pod;
+    private Float placa_pod;
 
     @Column(
             name = "czy_zatrudniony",
@@ -111,8 +109,8 @@ public class Pracownicy implements UserDetails {
 
     public Pracownicy(String imie,
                       String nazwisko,
-                      LocalDate data_zatrudnienia,
-                      Integer placa_pod,
+                      Date data_zatrudnienia,
+                      Float placa_pod,
                       Boolean czy_zatrudniony,
                       Stanowiska stanowisko,
                       String login,

@@ -48,7 +48,7 @@ public class Pokoje {
                 nullable = false,
                 columnDefinition = "NUMERIC(6, 2)"
         )
-        private Integer cena;
+        private Float cena;
 
         @Column(
                 name = "liczba_osob",
@@ -76,7 +76,7 @@ public class Pokoje {
         private TypyPokojow typ_pokoju;
 
         public Pokoje(Long id_pokoju,
-                      Integer cena,
+                      Float cena,
                       Integer liczba_osob,
                       Integer metraz,
                       Boolean czy_dostepny,
@@ -90,7 +90,7 @@ public class Pokoje {
                 this.typ_pokoju = typ_pokoju;
         }
 
-        public Pokoje(Integer cena,
+        public Pokoje(Float cena,
                       Integer liczba_osob,
                       Integer metraz,
                       Boolean czy_dostepny) {
