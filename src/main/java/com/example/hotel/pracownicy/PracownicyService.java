@@ -1,25 +1,33 @@
 package com.example.hotel.pracownicy;
 
-import java.util.List;
-import com.example.hotel.klienci.Klienci;
 import com.example.hotel.klienci.KlientRepository;
+import com.example.hotel.stanowiska.Stanowiska;
+import com.example.hotel.stanowiska.StanowiskaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import com.example.hotel.rezerwacje.Rezerwacje;
-import com.example.hotel.rezerwacje.RezerwacjeRepository;
+
+import java.lang.reflect.InvocationTargetException;
+import java.util.List;
 
 
 @Service
 public class PracownicyService implements UserDetailsService {
 
     private final PracownicyRepository pracownicyRepository;
+    private final KlientRepository klientRepository;
+    private final StanowiskaRepository stanowiskaRepository;
 
     @Autowired
-    public PracownicyService(PracownicyRepository pracownicyRepository) {
+    public PracownicyService(PracownicyRepository pracownicyRepository,
+                             KlientRepository klientRepository,
+                             StanowiskaRepository stanowiskaRepository) {
         this.pracownicyRepository = pracownicyRepository;
+        this.klientRepository = klientRepository;
+        this.stanowiskaRepository = stanowiskaRepository;
     }
 
     public Pracownicy authenticate(String login, String password) {
@@ -35,6 +43,19 @@ public class PracownicyService implements UserDetailsService {
     }
 
     public void addNewPracownik(Pracownicy pracownicy) {
+
+        Stanowiska stanowiska = stanowiskaRepository.getById(pracownicy.getStanowisko().getNazwa());
+
+        if (klientRepository.findByLogin(pracownicy.getLogin()).isPresent() || pracownicyRepository.findByLogin(pracownicy.getLogin()).isPresent()) {
+            throw new DataIntegrityViolationException("Login exist!");
+        }
+        else if (pracownicy.getPlaca_pod() < stanowiska.getPlaca_min() || pracownicy.getPlaca_pod() > stanowiska.getPlaca_max()){
+            throw new IllegalStateException(String.format("Placa na stanowisku %s wynosi (min: %s, max: %s)",
+                    pracownicy.getStanowisko().getNazwa(),
+                    stanowiska.getPlaca_min(),
+                    stanowiska.getPlaca_max()));
+        }
+
         pracownicyRepository.save(pracownicy);
     }
 

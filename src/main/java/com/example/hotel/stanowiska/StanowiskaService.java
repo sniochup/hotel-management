@@ -22,7 +22,6 @@ public class StanowiskaService {
     }
 
     public List<Stanowiska> getStanowiska() {
-//        System.out.println(stanowiskaRepository.findAll().get(0));
         return stanowiskaRepository.findAll();
     }
 }

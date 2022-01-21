@@ -24,6 +24,13 @@
 
     <h1 th:text="${formTitle}" class="text-center"></h1>
 
+    <div th:if="${param.login}" class="alert alert-danger w-50 mx-auto">
+        Login zajęty!
+    </div>
+    <div th:if="${param.placa}" class="alert alert-danger w-50 mx-auto">
+       Płaca nieodpowiednia dla stanowiska!
+    </div>
+
     <form id="html5Form"
           method="post"
           th:action="@{/pracownicy/dodaj}"
@@ -68,6 +75,8 @@
                    th:name="data_zatrudnienia"
                    th:value="${pracownicyAttributes.data_zatrudnienia}"
                    type="date"
+                   max="3000-01-01"
+                   min="2000-01-01"
                    placeholder="Wprowadź datę urodzenia pracownika"
                    required/>
 
