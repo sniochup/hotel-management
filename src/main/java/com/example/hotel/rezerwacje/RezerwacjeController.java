@@ -31,6 +31,7 @@ public class RezerwacjeController {
     public String getRezerwacje(Model model, Authentication authentication) {
 
         if (Objects.equals(authentication.getAuthorities().iterator().next().toString(), "KLIENT")) {
+//            System.out.println(rezerwacjeService.getRezerwacjeID(authentication.getName()).get(0).getUslugi()
             model.addAttribute("rAttributes", rezerwacjeService.getRezerwacjeID(authentication.getName()));
             return "views/klient/rezerwacje";
         }

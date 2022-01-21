@@ -13,6 +13,4 @@ public interface RezerwacjeRepository extends JpaRepository<Rezerwacje, Long> {
 
     @Query("SELECT r FROM Rezerwacje r JOIN Klienci k on k.id_klienta = r.klient.id_klienta WHERE k.login = ?1")
     List<Rezerwacje> findAllByKlient(String login);
-
-//    List<Rezerwacje> findByPokoje(Pokoje pokoje);
 }

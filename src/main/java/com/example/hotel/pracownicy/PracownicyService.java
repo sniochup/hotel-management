@@ -39,7 +39,6 @@ public class PracownicyService implements UserDetailsService {
     }
 
     public List<Pracownicy> getPracownicy() {
-        System.out.println(pracownicyRepository.findAll().get(0).getStanowisko().getNazwa());
         return pracownicyRepository.findAll();
     }
 

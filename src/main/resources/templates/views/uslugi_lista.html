@@ -16,28 +16,10 @@
 
 </head>
 <body>
+
 <nav th:replace="fragments/navbar :: navbar"></nav>
-
-<div class="container" style="margin-top:80px">
-    <table id="myTable" class="table table-striped display">
-
-        <thead class="table-dark">
-        <tr class="header-text-size">
-            <th>Id usługi</th>
-            <th>Nazwa</th>
-            <th>Cena</th>
-        </tr>
-        </thead>
-
-        <tbody>
-        <tr th:each="u : ${uAttributes}">
-            <td th:text="${u.id_uslugi}">ID Usługi</td>
-            <td th:text="${u.nazwa}">Nazwa</td>
-            <td th:text="${u.cena}">Cena</td>
-        </tr>
-        </tbody>
-
-    </table>
+<div style="margin-top:80px">
+    <div th:replace="fragments/uslugiList :: uList(uAttributes=${uAttributes})"></div>
 </div>
 
 </body>

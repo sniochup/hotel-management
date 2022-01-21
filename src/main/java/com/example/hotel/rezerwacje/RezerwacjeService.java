@@ -2,6 +2,7 @@ package com.example.hotel.rezerwacje;
 
 import com.example.hotel.klienci.Klienci;
 import com.example.hotel.klienci.KlientRepository;
+import com.example.hotel.pokoje.Pokoje;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,16 +25,10 @@ public class RezerwacjeService {
     }
 
     public List<Rezerwacje> getRezerwacje() {
-//        System.out.println(rezerwacjeRepository.findAll().get(0).getKlient().getLogin());
         return rezerwacjeRepository.findAll();
     }
 
     public List<Rezerwacje> getRezerwacjeID(String login) {
         return rezerwacjeRepository.findAllByKlient(login);
     }
-
-//    public List<Rezerwacje> getPokoje() {
-//        System.out.println(rezerwacjeRepository.findByPokoje());
-//        return rezerwacjeRepository.findByPokoje();
-//    }
 }

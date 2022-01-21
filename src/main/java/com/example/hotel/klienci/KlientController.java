@@ -26,7 +26,6 @@ public class KlientController {
     public String getKlients(Model model, Authentication authentication) {
 
         if (Objects.equals(authentication.getAuthorities().iterator().next().toString(), "KLIENT")) {
-//            System.out.println(klientService.getKlientByLogin(authentication.getName()).get());
             model.addAttribute("clientsAttributes", klientService.getKlientByLogin(authentication.getName()).get());
             return "views/klient/mojeKonto";
         }

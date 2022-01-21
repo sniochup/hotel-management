@@ -147,5 +147,4 @@ public class Rezerwacje {
                 ", klient=" + klient +
                 '}';
     }
-
 }

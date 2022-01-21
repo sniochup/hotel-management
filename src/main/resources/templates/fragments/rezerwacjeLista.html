@@ -2,7 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Lista rezerwacji</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css"/>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+
+    <script type="text/javascript" th:src="@{/js/file.js}"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/file.css}"/>
+
 </head>
 <body>
 
@@ -19,6 +30,7 @@
             <th>Płatność</th>
             <th>Status płatności</th>
             <th>Login klienta</th>
+            <th>Więcej</th>
         </tr>
         </thead>
 
@@ -31,6 +43,38 @@
             <td th:text="${r.platnosc}">Płatność</td>
             <td th:text="${r.status_platnosci}">Status płatności</td>
             <td th:text="${r.getKlient().getLogin()}">Login klienta</td>
+            <td>
+                <div class="offcanvas offcanvas-bottom" th:id="${'info' + r.id_rezerwacji}" style="height: 900px">
+                    <div class="offcanvas-header">
+                        <h1 class="offcanvas-title">Informacje</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+                    </div>
+                    <div class="offcanvas-body">
+
+                        <h3 class="text-center">Zarezerwowane Pokoje</h3>
+                        <div th:replace="fragments/pokojeList :: pokList(pAttributes=${r.getPokoje()})"></div>
+
+                        <h3 class="text-center">Zarezerwowane Miejsca Parkingowe</h3>
+                        <div th:replace="fragments/parkingList :: parkingList(mAttributes=${r.getMiejsca_parkingowe()})"></div>
+
+                        <h3 class="text-center">Zarezerwowane Wyżywienie</h3>
+                        <div th:replace="fragments/wyzywienieList :: wyzList(pAttributes=${r.getPakiety_wyzywien()})"></div>
+
+                        <h3 class="text-center">Zarezerwowane Usługi</h3>
+                        <div th:replace="fragments/uslugiList :: uList(uAttributes=${r.getUslugi()})"></div>
+
+                        <div class="d-flex justify-content-center align-items-center mt-4">
+                            <button class="btn btn-warning mt-2 col-md-3 disabled" type="button">Edytuj</button>
+                        </div>
+
+                    </div>
+                </div>
+
+                <button type="button" class="btn btn-outline-primary" data-bs-toggle="offcanvas"
+                        th:data-bs-target="${'#info' + r.id_rezerwacji}">Info
+                </button>
+
+            </td>
         </tr>
         </tbody>
 
