@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dodaj stanowisko</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css"/>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+
+    <script type="text/javascript" th:src="@{/js/file.js}"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/file.css}"/>
+
+</head>
+<body style="background-color: #F4EFEF;">
+<nav th:replace="fragments/navbar :: navbar"></nav>
+
+<div class="container-md" style="margin-top:80px; margin-bottom: 50px">
+
+    <img class="rounded mx-auto d-block" th:src="@{/img/logo.png}" width="150" height="150">
+
+    <h1 th:text="${formTitle}" class="text-center"></h1>
+
+    <form id="html5Form"
+          method="post"
+          th:action="@{/stanowiska/dodaj}"
+          class="w-50 mx-auto was-validated">
+
+        <div class="form-group mt-4">
+            <label for="nazwa" class="form-label">Nazwa stanowiska:</label>
+            <input id = "nazwa"
+                   class="form-control"
+                   th:name="nazwa"
+                   th:value="${stanowiskaAttributes.nazwa}"
+                   type="text"
+                   placeholder="Wprowadź nazwę stanowiska"
+                   required />
+
+            <div class="valid-feedback">Zweryfikowano</div>
+            <div class="invalid-feedback">Pole wymagane! </div>
+        </div>
+
+        <div class="form-group mt-4">
+            <label for="placa_min" class="form-label">Płaca minimalna:</label>
+            <input id="placa_min"
+                   class="form-control"
+                   th:name="placa_min"
+                   th:value="${stanowiskaAttributes.placa_min}"
+                   type="number"
+                   placeholder="Wprowadź płacę minimalną"
+                   required/>
+
+            <div class="valid-feedback">Zweryfikowano</div>
+            <div class="invalid-feedback">Pole wymagane!</div>
+        </div>
+
+        <div class="form-group mt-4">
+            <label for="placa_max" class="form-label">Płaca maksymalna:</label>
+            <input id="placa_max"
+                   class="form-control"
+                   th:name="placa_max"
+                   th:value="${stanowiskaAttributes.placa_max}"
+                   type="number"
+                   placeholder="Wprowadź płacę maksymalną"
+                   required/>
+
+            <div class="valid-feedback">Zweryfikowano</div>
+            <div class="invalid-feedback">Pole wymagane!</div>
+        </div>
+
+        <div class="d-flex justify-content-between align-items-center mt-4">
+            <input type="reset" class="btn btn-dark mt-2 col-md-5" value="Reset"/>
+            <input type="submit" class="btn btn-dark mt-2 col-md-5" value="Zapisz"/>
+        </div>
+
+    </form>
+</div>
+
+</body>
+</html>
