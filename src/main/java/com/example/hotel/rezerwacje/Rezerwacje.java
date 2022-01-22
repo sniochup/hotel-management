@@ -4,6 +4,7 @@ import com.example.hotel.klienci.Klienci;
 import com.example.hotel.miejscaParkingowe.MiejscaParkingowe;
 import com.example.hotel.pakietyWyzywien.PakietyWyzywien;
 import com.example.hotel.pokoje.Pokoje;
+import com.example.hotel.typyPokojow.TypyPokojow;
 import com.example.hotel.uslugi.Uslugi;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -63,15 +64,9 @@ public class Rezerwacje {
     )
     private Set<MiejscaParkingowe> miejsca_parkingowe = new HashSet<>();
 
-    @ManyToMany(
-            cascade = {CascadeType.MERGE, CascadeType.PERSIST}
-    )
-    @JoinTable(
-            name = "wykupione_wyzywienie",
-            joinColumns = @JoinColumn(name = "id_rezerwacji"),
-            inverseJoinColumns = @JoinColumn(name = "id_pakietu")
-    )
-    private Set<PakietyWyzywien> pakiety_wyzywien = new HashSet<>();
+    @ManyToOne
+    @JoinColumn(name = "id_pakietu", nullable = false)
+    private PakietyWyzywien pakietyWyzywien;
 
     @ManyToMany(
             cascade = {CascadeType.MERGE, CascadeType.PERSIST}

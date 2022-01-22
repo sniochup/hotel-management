@@ -1,5 +1,6 @@
 package com.example.hotel.pakietyWyzywien;
 
+import com.example.hotel.pokoje.Pokoje;
 import com.example.hotel.rezerwacje.Rezerwacje;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -54,8 +55,8 @@ public class PakietyWyzywien {
     )
     private Float cena_dzien;
 
-    @ManyToMany(mappedBy = "pakiety_wyzywien")
-    private Set<Rezerwacje> rezerwacje = new HashSet<>();
+    @OneToMany(mappedBy = "pakietyWyzywien")
+    private Set<Rezerwacje> rezerwacjeSet;
 
 
     public PakietyWyzywien(String typ, Float cena_dzien) {
