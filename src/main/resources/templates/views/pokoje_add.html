@@ -48,23 +48,23 @@
 
         <div class="form-group mt-4">
             <label for="liczba_osob" class="form-label">Liczba osób w pokoju:</label>
-            <input id = "liczba_osob"
-                    class="form-select"
-                    th:name="liczba_osob"
-                    th:value="${pokojeAttributes.liczba_osob}"
-                    type="number"
-                    max="99"
-                    min="0"
-                    placeholder="Wprowadź liczbę osób w pokoju"
-                    required/>
+            <input id="liczba_osob"
+                   class="form-select"
+                   th:name="liczba_osob"
+                   th:value="${pokojeAttributes.liczba_osob}"
+                   type="number"
+                   max="99"
+                   min="0"
+                   placeholder="Wprowadź liczbę osób w pokoju"
+                   required/>
 
             <div class="valid-feedback">Zweryfikowano</div>
-            <div class="invalid-feedback">Pole wymagane! </div>
+            <div class="invalid-feedback">Pole wymagane!</div>
         </div>
 
         <div class="form-group mt-4">
             <label for="metraz" class="form-label">Metraż pokoju:</label>
-            <input id = "metraz"
+            <input id="metraz"
                    class="form-select"
                    th:name="metraz"
                    th:value="${pokojeAttributes.metraz}"
@@ -75,7 +75,24 @@
                    required/>
 
             <div class="valid-feedback">Zweryfikowano</div>
-            <div class="invalid-feedback">Pole wymagane! </div>
+            <div class="invalid-feedback">Pole wymagane!</div>
+        </div>
+
+        <div class="form-group mt-4">
+            <label for="typ_pokoju" class="form-label">Typ pokoju:</label>
+            <select id="typ_pokoju"
+                    class="form-select"
+                    th:name="typ_pokoju"
+                    th:value="${pokojeAttributes.typ_pokoju}"
+                    placeholder="Wprowadź informację o typie pokoju"
+                    required>
+                <option th:each="t : ${tAttributes}" th:value="${t.id_typu}"
+                        th:text="${t.standard +' - Klimatyzajca: ' + t.czy_klima + ' Balkon: ' + t.czy_balkon + ' Kuchnia: ' + t.czy_kuchnia}">
+                </option>
+            </select>
+
+            <div class="valid-feedback">Zweryfikowano</div>
+            <div class="invalid-feedback">Pole wymagane!</div>
         </div>
 
         <div class="form-group mt-4">
@@ -93,29 +110,6 @@
             <div class="valid-feedback">Zweryfikowano</div>
             <div class="invalid-feedback">Pole wymagane!</div>
         </div>
-
-        <div class="form-group mt-4">
-            <label for="typ_pokoju" class="form-label">Typ pokoju:</label>
-            <select id="typ_pokoju"
-                    class="form-select"
-                    th:name="typ_pokoju"
-                    th:value="${pokojeAttributes.typ_pokoju}"
-                    placeholder="Wprowadź informację o typie pokoju"
-                    required>
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-                <option>6</option>
-                <option>7</option>
-            </select>
-
-            <div class="valid-feedback">Zweryfikowano</div>
-            <div class="invalid-feedback">Pole wymagane!</div>
-        </div>
-
-
 
         <div class="d-flex justify-content-between align-items-center mt-4">
             <input type="reset" class="btn btn-dark mt-2 col-md-5" value="Reset"/>

@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.sql.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -88,14 +88,14 @@ public class Rezerwacje {
             nullable = false,
             columnDefinition = "DATE"
     )
-    private LocalDate data_od;
+    private Date data_od;
 
     @Column(
             name = "data_do",
             nullable = false,
             columnDefinition = "DATE"
     )
-    private LocalDate data_do;
+    private Date data_do;
 
     @Column(
             name = "status",
@@ -122,11 +122,11 @@ public class Rezerwacje {
     @JoinColumn(name = "id_klienta", nullable = false)
     private Klienci klient;
 
-    public Rezerwacje(LocalDate data_od,
-                  LocalDate data_do,
-                  String status,
-                  Integer platnosc,
-                  String status_platnosci) {
+    public Rezerwacje(Date data_od,
+                      Date data_do,
+                      String status,
+                      Integer platnosc,
+                      String status_platnosci) {
         this.id_rezerwacji = id_rezerwacji;
         this.data_od = data_od;
         this.data_do = data_do;
@@ -134,6 +134,8 @@ public class Rezerwacje {
         this.platnosc = platnosc;
         this.status_platnosci = status_platnosci;
     }
+
+
 
     @Override
     public String toString() {

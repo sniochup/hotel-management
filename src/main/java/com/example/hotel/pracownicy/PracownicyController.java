@@ -3,6 +3,7 @@ package com.example.hotel.pracownicy;
 
 import com.example.hotel.pokoje.Pokoje;
 import com.example.hotel.rezerwacje.RezerwacjeService;
+import com.example.hotel.stanowiska.StanowiskaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -22,10 +23,13 @@ public class PracownicyController {
     BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     private final PracownicyService pracownicyService;
+    private final StanowiskaService stanowiskaService;
 
     @Autowired
-    public PracownicyController(PracownicyService pracownicyService) {
+    public PracownicyController(PracownicyService pracownicyService,
+                                StanowiskaService stanowiskaService) {
         this.pracownicyService = pracownicyService;
+        this.stanowiskaService = stanowiskaService;
     }
 
     @GetMapping(path = "/wyswietl")
@@ -37,6 +41,7 @@ public class PracownicyController {
     @GetMapping(path = "/dodaj")
     public String getForm(Model model) {
         model.addAttribute("pracownicyAttributes", new Pracownicy());
+        model.addAttribute("sAttributes", stanowiskaService.getStanowiska());
         model.addAttribute("formTitle", "Dodawanie nowego pracownika");
         return "views/pracownicy_add";
     }
@@ -45,6 +50,7 @@ public class PracownicyController {
     public String addProgrammingLanguageSubmit(@ModelAttribute Pracownicy pracownicy) {
         try {
             pracownicy.setPassword(passwordEncoder.encode(pracownicy.getPassword()));
+            System.out.println(pracownicy.getCzy_zatrudniony());
             pracownicyService.addNewPracownik(pracownicy);
         } catch (DataIntegrityViolationException e) {
             return "redirect:/pracownicy/dodaj?login";

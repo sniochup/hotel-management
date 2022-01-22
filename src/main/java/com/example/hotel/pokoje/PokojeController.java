@@ -3,6 +3,7 @@ package com.example.hotel.pokoje;
 
 import com.example.hotel.pakietyWyzywien.PakietyWyzywien;
 import com.example.hotel.pracownicy.PracownicyService;
+import com.example.hotel.typyPokojow.TypyPokojowService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,10 +17,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class PokojeController {
 
     private final PokojeService pokojeService;
+    private final TypyPokojowService typyPokojowService;
 
     @Autowired
-    public PokojeController(PokojeService pokojeService) {
+    public PokojeController(PokojeService pokojeService,
+                            TypyPokojowService typyPokojowService) {
         this.pokojeService = pokojeService;
+        this.typyPokojowService = typyPokojowService;
     }
 
     @GetMapping(path = "/wyswietl")
@@ -31,6 +35,7 @@ public class PokojeController {
     @GetMapping(path = "/dodaj")
     public String getForm(Model model) {
         model.addAttribute("pokojeAttributes", new Pokoje());
+        model.addAttribute("tAttributes", typyPokojowService.getTypyPokojow());
         model.addAttribute("formTitle", "Dodawanie nowego pokoju");
         return "views/pokoje_add";
     }
