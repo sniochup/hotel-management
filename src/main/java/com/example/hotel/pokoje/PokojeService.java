@@ -23,7 +23,6 @@ public class PokojeService {
     }
 
     public List<Pokoje> getPokoje() {
-        System.out.println(pokojeRepository.findAll().get(0).getTyp_pokoju().getStandard());
         return pokojeRepository.findAll();
     }
 }

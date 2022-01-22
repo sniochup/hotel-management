@@ -53,14 +53,14 @@ public class Pokoje {
         @Column(
                 name = "liczba_osob",
                 nullable = false,
-                columnDefinition = "NUMERIC(4)"
+                columnDefinition = "NUMERIC(2)"
         )
         private Integer liczba_osob;
 
         @Column(
                 name = "metraz",
                 nullable = false,
-                columnDefinition = "NUMERIC(3)"
+                columnDefinition = "NUMERIC(2)"
         )
         private Integer metraz;
 

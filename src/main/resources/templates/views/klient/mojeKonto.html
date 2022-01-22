@@ -19,7 +19,7 @@
 <nav th:replace="fragments/navbarKlient :: navbar"></nav>
 
 <div class="container" style="margin-top:80px">
-    <table id="myTable" class="table table-striped display">
+    <table id="mm" class="table table-striped display">
 
         <h1 class="text-center">
             Dane Klienta
@@ -45,6 +45,14 @@
         <tr>
             <td>Rok urodzenia</td>
             <td th:text="${clientsAttributes.rok_urodzenia}">Rok urodzenia</td>
+        </tr>
+        <tr>
+            <td>Rabat</td>
+            <td th:text="${clientsAttributes.getRabat() != null ? clientsAttributes.getRabat().getTyp() : 'Brak'}">Rabat</td>
+        </tr>
+        <tr>
+            <td>Wysokość Rabatu [%]</td>
+            <td th:text="${clientsAttributes.getRabat() != null ? clientsAttributes.getRabat().getWysokosc_rabatu() : 'Brak'}">Rabat</td>
         </tr>
 
         </tbody>

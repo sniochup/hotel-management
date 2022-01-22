@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Klienci</title>
+    <title>Usługi</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
     <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
@@ -15,31 +15,24 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/file.css}"/>
 
 </head>
-<body style="background-color: #F4EFEF;">
-<nav th:replace="fragments/navbar :: navbar"></nav>
+<body>
 
-<div class="container" style="margin-top:80px">
+<div th:fragment="uList(uAttributes)" class="container">
     <table id="myTable" class="table table-striped display">
 
         <thead class="table-dark">
         <tr class="header-text-size">
-            <th>ID Klienta</th>
-            <th>Login</th>
-            <th>Imie</th>
-            <th>Nazwisko</th>
-            <th>Rok urodzenia</th>
-            <td>Rabat</td>
+            <th>Id usługi</th>
+            <th>Nazwa</th>
+            <th>Cena</th>
         </tr>
         </thead>
 
         <tbody>
-        <tr th:each="k : ${clientsAttributes}">
-            <td th:text="${k.id_klienta}">ID Klienta</td>
-            <td th:text="${k.login}">Login</td>
-            <td th:text="${k.imie}">Imie</td>
-            <td th:text="${k.nazwisko}">Nazwisko</td>
-            <td th:text="${k.rok_urodzenia}">Rok urodzenia</td>
-            <td th:text="${k.getRabat() != null ? k.getRabat().getTyp() : 'Brak'}">Rabat</td>
+        <tr th:each="u : ${uAttributes}">
+            <td th:text="${u.id_uslugi}">ID Usługi</td>
+            <td th:text="${u.nazwa}">Nazwa</td>
+            <td th:text="${u.cena}">Cena</td>
         </tr>
         </tbody>
 

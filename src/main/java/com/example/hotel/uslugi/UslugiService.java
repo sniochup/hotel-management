@@ -22,7 +22,6 @@ public class UslugiService {
     }
 
     public List<Uslugi> getUslugi() {
-//        System.out.println(uslugiRepository.findAll().get(0));
         return uslugiRepository.findAll();
     }
 }

@@ -6,6 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
     <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css"/>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+
+    <script type="text/javascript" th:src="@{/js/file.js}"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/file.css}"/>
+
 </head>
 
 <body>
@@ -29,7 +37,7 @@
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Moje Rezerwacje</a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" th:href="@{/rezerwacje/wyswietl}">Wyświetl</a></li>
-                        <li><a class="dropdown-item disabled" th:href="@{/rezerwacje/nowa}">Nowa</a></li>
+                        <li><a class="dropdown-item" th:href="@{/rezerwacje/dodaj}">Nowa</a></li>
                     </ul>
                 </li>
 
