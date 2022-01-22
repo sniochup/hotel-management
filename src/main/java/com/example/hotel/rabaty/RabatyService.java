@@ -1,11 +1,10 @@
 package com.example.hotel.rabaty;
 
-import com.example.hotel.pakietyWyzywien.PakietyWyzywien;
-import com.example.hotel.pakietyWyzywien.PakietyWyzywienRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class RabatyService {
@@ -22,7 +21,10 @@ public class RabatyService {
     }
 
     public List<Rabaty> getRabaty() {
-//        System.out.println(rabatyRepository.findAll().get(0));
         return rabatyRepository.findAll();
+    }
+
+    public Optional<Rabaty> getRabatyId(Long id) {
+        return rabatyRepository.findById(id);
     }
 }

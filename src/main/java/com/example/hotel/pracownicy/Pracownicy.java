@@ -23,7 +23,8 @@ import java.util.*;
 @Table(
         name = "pracownicy",
         uniqueConstraints = {
-                @UniqueConstraint(name = "id_pracownika_unique", columnNames = "id_pracownika")
+                @UniqueConstraint(name = "id_pracownika_unique", columnNames = "id_pracownika"),
+                @UniqueConstraint(name = "pracownik_login_unique", columnNames = "login")
         }
 )
 @EqualsAndHashCode

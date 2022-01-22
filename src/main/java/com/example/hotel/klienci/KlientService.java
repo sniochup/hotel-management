@@ -1,6 +1,7 @@
 package com.example.hotel.klienci;
 
 import com.example.hotel.pracownicy.PracownicyRepository;
+import com.example.hotel.rabaty.Rabaty;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -69,6 +70,13 @@ public class KlientService implements UserDetailsService {
                     "klient with id " + klientid + " does not exists");
         }
         klientRepository.deleteById(klientid);
+    }
+
+    public void setRabat(String login, Rabaty rabaty) {
+        Klienci klient = klientRepository.findByLogin(login)
+                .orElseThrow(() -> new IllegalStateException(
+                        "klient with login " + login + "does not exists"));
+        klient.setRabat(rabaty);
     }
 
     @Transactional

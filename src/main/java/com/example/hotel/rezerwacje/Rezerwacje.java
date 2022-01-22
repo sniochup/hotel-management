@@ -65,7 +65,7 @@ public class Rezerwacje {
     private Set<MiejscaParkingowe> miejsca_parkingowe = new HashSet<>();
 
     @ManyToOne
-    @JoinColumn(name = "id_pakietu", nullable = false)
+    @JoinColumn(name = "id_pakietu", nullable = true)
     private PakietyWyzywien pakietyWyzywien;
 
     @ManyToMany(
@@ -102,9 +102,9 @@ public class Rezerwacje {
     @Column(
             name = "platnosc",
 //            nullable = false,
-            columnDefinition = "NUMERIC(6, 2)"
+            columnDefinition = "NUMERIC(10, 2)"
     )
-    private Integer platnosc;
+    private Float platnosc;
 
     @Column(
             name = "status_platnosci",
@@ -120,7 +120,7 @@ public class Rezerwacje {
     public Rezerwacje(Date data_od,
                       Date data_do,
                       String status,
-                      Integer platnosc,
+                      Float platnosc,
                       String status_platnosci) {
         this.id_rezerwacji = id_rezerwacji;
         this.data_od = data_od;
