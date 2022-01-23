@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -63,4 +64,7 @@ public class PracownicyService implements UserDetailsService {
         return pracownicyRepository.findAll();
     }
 
+    public Optional<Pracownicy> getPracownicyByLogin(String login) {
+        return pracownicyRepository.findByLogin(login);
+    }
 }

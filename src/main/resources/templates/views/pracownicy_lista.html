@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Pracownicy</title>
+    <link rel="icon" type="image/x-icon" th:href="@{/img/logo.png}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
     <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
@@ -23,7 +24,8 @@
 
         <thead class="table-dark">
         <tr class="header-text-size">
-            <th>ID Pracownika</th>
+            <th>ID Prac</th>
+            <th>Login</th>
             <th>Imię</th>
             <th>Nazwisko</th>
             <th>Data zatrudnienia</th>
@@ -35,7 +37,8 @@
 
         <tbody>
         <tr th:each="p : ${pAttributes}">
-            <td th:text="${p.id_pracownika}">ID pracownika</td>
+            <td th:text="${p.id_pracownika}">ID Prac</td>
+            <td th:text="${p.login}">Login</td>
             <td th:text="${p.imie}">Imię</td>
             <td th:text="${p.nazwisko}">Nazwisko</td>
             <td th:text="${p.data_zatrudnienia}">Data zatrudnienia</td>

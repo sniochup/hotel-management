@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.security.Principal;
 import java.util.Objects;
 
 @Controller
@@ -38,7 +39,7 @@ public class LoginController {
     }
 
     @GetMapping(path = "/")
-    public String getHome(Authentication authentication) {
+    public String getHome(Authentication authentication, Model model) {
 
         if (Objects.equals(authentication.getAuthorities().iterator().next().toString(), "KLIENT")) {
             return "views/klient/indexHome";

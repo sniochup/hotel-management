@@ -5,7 +5,6 @@ import com.example.hotel.pracownicy.PracownicyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -20,6 +19,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final KlientService klientService;
     private final PracownicyService pracownicyService;
+    BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     @Autowired
     public SecurityConfig(KlientService klientService, PracownicyService pracownicyService) {
@@ -30,7 +30,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(daoAuthenticationProvider())
-            .authenticationProvider(daoAuthenticationProviderPrac());
+                .authenticationProvider(daoAuthenticationProviderPrac())
+                .inMemoryAuthentication()
+                .withUser("admin")
+                .password(passwordEncoder.encode("admin"))
+                .authorities("WLASCICIEL");
     }
 
     @Bean
@@ -56,8 +60,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-//                .antMatchers("/user").hasAnyRole("USER", "ADMIN")
-//                .antMatchers("/").permitAll()
+                .antMatchers("/rezerwacje/dodaj").hasAuthority("KLIENT")
+                .antMatchers("/pracownicy/dodaj").hasAuthority("WLASCICIEL")
+                .antMatchers("/stanowiska/dodaj").hasAuthority("WLASCICIEL")
+                .antMatchers("/pokoje/**").hasAnyAuthority("WLASCICIEL", "PRACOWNIK")
+                .antMatchers("/miejscaParkingowe/**").hasAnyAuthority("WLASCICIEL", "PRACOWNIK")
+                .antMatchers("/pakietyWyzywien/**").hasAnyAuthority("WLASCICIEL", "PRACOWNIK")
+                .antMatchers("/rabaty/**").hasAnyAuthority("WLASCICIEL", "PRACOWNIK")
+                .antMatchers("/stanowiska/wyswietl").hasAnyAuthority("WLASCICIEL", "PRACOWNIK")
+                .antMatchers("/pracownicy/wyswietl").hasAnyAuthority("WLASCICIEL", "PRACOWNIK")
+                .antMatchers("/uslugi/**").hasAnyAuthority("WLASCICIEL", "PRACOWNIK")
+                .antMatchers("/typyPokojow/**").hasAnyAuthority("WLASCICIEL", "PRACOWNIK")
                 .antMatchers("/rejestracja").permitAll()
                 .anyRequest()
                 .authenticated()
@@ -75,7 +88,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) throws Exception {
         web
                 .ignoring()
-                .antMatchers("/resources/**", "/static/**","/webjars/**", "/img/**");
+                .antMatchers("/resources/**", "/static/**", "/webjars/**", "/img/**");
     }
 
     @Bean

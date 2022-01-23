@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Logowanie</title>
+    <link rel="icon" type="image/x-icon" th:href="@{/img/logo.png}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
     <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
@@ -27,7 +27,6 @@
           method="post"
           th:action="@{/login}"
           class="w-50 mx-auto was-validated">
-
 
         <img class="rounded mx-auto d-block" th:src="@{/img/logo.png}" width="150" height="150">
 

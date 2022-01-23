@@ -6,6 +6,7 @@ import com.example.hotel.rezerwacje.RezerwacjeService;
 import com.example.hotel.stanowiska.StanowiskaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.io.IOException;
+import java.util.Objects;
 
 @Controller
 @RequestMapping(path = "/pracownicy")
@@ -33,7 +35,13 @@ public class PracownicyController {
     }
 
     @GetMapping(path = "/wyswietl")
-    public String getPracownicy(Model model) {
+    public String getPracownicy(Model model, Authentication authentication) {
+
+        if (Objects.equals(authentication.getAuthorities().iterator().next().toString(), "PRACOWNIK")) {
+            model.addAttribute("pAttributes", pracownicyService.getPracownicyByLogin(authentication.getName()).get());
+            return "views/pracownik/mojeDane";
+        }
+
         model.addAttribute("pAttributes", pracownicyService.getPracownicy());
         return "views/pracownicy_lista";
     }

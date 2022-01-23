@@ -17,45 +17,44 @@
 
 </head>
 <body>
-<nav th:replace="fragments/navbarKlient :: navbar"></nav>
+<nav th:replace="fragments/navbarPracownik :: navbarPracownik"></nav>
 
 <div class="container" style="margin-top:80px">
     <table id="mm" class="table table-striped display">
 
         <h1 class="text-center">
-            Dane Klienta
+            Dane Pracownika
         </h1>
 
         <tbody>
         <tr>
-            <td>ID Klienta</td>
-            <td th:text="${clientsAttributes.id_klienta}">ID Klienta</td>
+            <td>ID Pracownika</td>
+            <td th:text="${pAttributes.id_pracownika}">ID Klienta</td>
         </tr>
         <tr>
             <td>Login</td>
-            <td th:text="${clientsAttributes.login}">Login</td>
+            <td th:text="${pAttributes.login}">Login</td>
         </tr>
         <tr>
             <td>Imie</td>
-            <td th:text="${clientsAttributes.imie}">Imie</td>
+            <td th:text="${pAttributes.imie}">Imie</td>
         </tr>
         <tr>
             <td>Nazwisko</td>
-            <td th:text="${clientsAttributes.nazwisko}">Nazwisko</td>
+            <td th:text="${pAttributes.nazwisko}">Nazwisko</td>
         </tr>
         <tr>
-            <td>Rok urodzenia</td>
-            <td th:text="${clientsAttributes.rok_urodzenia}">Rok urodzenia</td>
+            <td>Data zatrudnienia</td>
+            <td th:text="${pAttributes.data_zatrudnienia}">Data zatrudnienia</td>
         </tr>
         <tr>
-            <td>Rabat</td>
-            <td th:text="${clientsAttributes.getRabat() != null ? clientsAttributes.getRabat().getTyp() : 'Brak'}">Rabat</td>
+            <td>Płaca podstawowa</td>
+            <td th:text="${pAttributes.placa_pod}">Płaca podstawowa</td>
         </tr>
         <tr>
-            <td>Wysokość Rabatu [%]</td>
-            <td th:text="${clientsAttributes.getRabat() != null ? clientsAttributes.getRabat().getWysokosc_rabatu() : 'Brak'}">Rabat</td>
+            <td>Nazwa stanowiska</td>
+            <td th:text="${pAttributes.getStanowisko().getNazwa()}">Nazwa stanowiska</td>
         </tr>
-
         </tbody>
 
     </table>
