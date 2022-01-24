@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.time.LocalDate;
-import java.time.Period;
+import java.time.temporal.ChronoUnit;
 import java.util.Objects;
 
 @Controller
@@ -78,7 +78,8 @@ public class RezerwacjeController {
 
         LocalDate start = (rezerwacje.getData_od()).toLocalDate();
         LocalDate end = (rezerwacje.getData_do()).toLocalDate();
-        int days = Period.between(start, end).getDays();
+        Long days = ChronoUnit.DAYS.between(start, end);
+        System.out.println(days);
 
         float cena = 0;
         Integer liczba_osob = 0;
@@ -105,7 +106,7 @@ public class RezerwacjeController {
         if (rabaty != null) {
             klientService.setRabat(authentication.getName(), rabaty);
 //            System.out.println(1 - rabaty.getWysokosc_rabatu() * 0.01);
-            cena = (float) (cena * (1 - rabaty.getWysokosc_rabatu()* 0.01));
+            cena = (float) (cena * (1 - rabaty.getWysokosc_rabatu() * 0.01));
         }
 
         rezerwacje.setPlatnosc(cena);
