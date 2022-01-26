@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>ERROR</title>
+    <link rel="icon" type="image/x-icon" th:href="@{/img/logo.png}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+
+    <script type="text/javascript" th:src="@{/js/file.js}"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/file.css}"/>
+</head>
+<body>
+
+<div sec:authorize="hasAuthority('WLASCICIEL')">
+    <nav th:replace="fragments/navbar :: navbar"></nav>
+</div>
+
+<div sec:authorize="hasAuthority('PRACOWNIK')">
+    <nav th:replace="fragments/navbarPracownik :: navbarPracownik"></nav>
+</div>
+
+<div sec:authorize="hasAuthority('KLIENT')">
+    <nav th:replace="fragments/navbarKlient :: navbar"></nav>
+</div>
+
+<div class="container" style="margin-top:100px">
+    <h3 class="text-center">
+        <p>Coś poszło nie tak!</p>
+        <p>Spokojnie już nad tym pracujemy!
+        <div class="spinner-border text-primary"></div>
+        </p>
+        <p>Ps. Wciąż idzie nam lepiej niż eKursą i eMeeting!!!</p>
+    </h3>
+    <img class="rounded mx-auto d-block" th:srcset="@{/img/broken.webp}" type="image/webp" width="150" height="150">
+</div>
+
+</body>
+</html>

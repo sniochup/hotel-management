@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome page!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+</head>
+
+<body>
+<nav th:fragment="navbarLogin"
+     class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+
+    <div class="container-fluid">
+
+        <a class="navbar-brand" th:href="@{/}">
+            <img th:src="@{/img/logo.png}" alt="Logo" style="width:40px;" class="rounded-pill">
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#Navbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="Navbar">
+            <ul class="navbar-nav ms-auto">
+
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/login}">Logowanie</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/rejestracja}">Rejestracja</a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</nav>
+
+</body>
+</html>

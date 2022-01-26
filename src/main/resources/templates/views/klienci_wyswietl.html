@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Klienci</title>
+    <link rel="icon" type="image/x-icon" th:href="@{/img/logo.png}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css"/>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+
+    <script type="text/javascript" th:src="@{/js/file.js}"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/file.css}"/>
+
+</head>
+<body>
+<div sec:authorize="hasAuthority('WLASCICIEL')">
+    <nav th:replace="fragments/navbar :: navbar"></nav>
+</div>
+
+<div sec:authorize="hasAuthority('PRACOWNIK')">
+    <nav th:replace="fragments/navbarPracownik :: navbarPracownik"></nav>
+</div>
+
+<div class="container" style="margin-top:80px">
+    <table id="myTable" class="table table-striped display">
+
+        <thead class="table-dark">
+        <tr class="header-text-size">
+            <th>ID Klienta</th>
+            <th>Login</th>
+            <th>Imie</th>
+            <th>Nazwisko</th>
+            <th>Rok urodzenia</th>
+            <td>Rabat</td>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="k : ${clientsAttributes}">
+            <td th:text="${k.id_klienta}">ID Klienta</td>
+            <td th:text="${k.login}">Login</td>
+            <td th:text="${k.imie}">Imie</td>
+            <td th:text="${k.nazwisko}">Nazwisko</td>
+            <td th:text="${k.rok_urodzenia}">Rok urodzenia</td>
+            <td th:text="${k.getRabat() != null ? k.getRabat().getTyp() : 'Brak'}">Rabat</td>
+        </tr>
+        </tbody>
+
+    </table>
+</div>
+
+</body>
+</html>

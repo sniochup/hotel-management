@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <link rel="icon" type="image/x-icon" th:href="@{/img/logo.png}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+</head>
+
+<body>
+
+<nav th:replace="fragments/navbarKlient :: navbar"></nav>
+<div th:replace="fragments/home :: home"></div>
+
+</body>
+</html>

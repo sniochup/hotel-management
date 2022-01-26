@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Nowa rezerwacja</title>
+    <link rel="icon" type="image/x-icon" th:href="@{/img/logo.png}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css"/>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+
+    <script type="text/javascript" th:src="@{/js/file.js}"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/file.css}"/>
+
+</head>
+<body>
+<nav th:replace="fragments/navbarKlient :: navbar"></nav>
+
+<div class="container-md" style="margin-top:80px; margin-bottom: 50px">
+
+    <img class="rounded mx-auto d-block" th:src="@{/img/logo.png}" width="150" height="150">
+
+    <h1 th:text="${formTitle}" class="text-center"></h1>
+
+    <form id="html5Form"
+          method="post"
+          th:action="@{/rezerwacje/dodaj}"
+          class="w-50 mx-auto was-validated">
+
+        <div class="form-group mt-4 date">
+            <label for="data_od" class="form-label">Data Początku:</label>
+            <input id="data_od"
+                   class="form-control"
+                   th:name="data_od"
+                   th:value="${#temporals.format(poczatek, 'yyyy-MM-dd')}"
+                   type="date"
+                   placeholder="Wprowadź date początku"
+                   readonly/>
+
+            <div class="valid-feedback">Zweryfikowano</div>
+            <div class="invalid-feedback">Pole wymagane!</div>
+        </div>
+
+        <div class="form-group mt-4 date">
+            <label for="data_do" class="form-label">Data Końca:</label>
+            <input id="data_do"
+                   class="form-control disabled"
+                   th:name="data_do"
+                   th:value="${#temporals.format(koniec, 'yyyy-MM-dd')}"
+                   type="date"
+                   placeholder="Wprowadź date końca"
+                   readonly/>
+
+            <div class="valid-feedback">Zweryfikowano</div>
+            <div class="invalid-feedback">Pole wymagane!</div>
+        </div>
+
+        <div class="form-group mt-4">
+            <label for="pokoje" class="form-label">Pokoje:</label>
+            <select id="pokoje"
+                    multiple class="form-select"
+                    th:name="pokoje"
+                    th:value="${rAttributes.pokoje}"
+                    placeholder="Wybierz pokoje"
+                    required>
+                <option th:each="p : ${pAttributes}" th:value="${p.id_pokoju}"
+                        th:text="${'Cena: ' + p.cena + ' Licz. Osób: ' + p.liczba_osob + ' Metraż: ' + p.metraz + ' Standard: '+ p.getTyp_pokoju().getStandard()}">
+                </option>
+            </select>
+
+            <div class="valid-feedback">Zweryfikowano</div>
+            <div class="invalid-feedback">Pole wymagane!</div>
+        </div>
+
+        <div class="form-group mt-4">
+            <label for="parking" class="form-label">Miejsca parkingowe:</label>
+            <select id="parking"
+                    multiple class="form-select"
+                    th:name="miejsca_parkingowe"
+                    th:value="${rAttributes.miejsca_parkingowe}"
+                    placeholder="Wybierz pokoje">
+                <option th:each="m : ${mAttributes}" th:value="${m.id_miejsca}"
+                        th:text="${'Cena: ' + m.cena + ' Typ: ' + m.typ}">
+                </option>
+            </select>
+        </div>
+
+        <div class="form-group mt-4">
+            <label class="form-label">Pakiet wyżywienia:</label>
+            <div class="form-check" th:each="w : ${wAttributes}">
+                <input id="${'pakiety_wyzywien' + w.id_pakietu}"
+                       class="form-check-input"
+                       th:name="pakiety_wyzywien"
+                       th:value="${w.id_pakietu}"
+                       th:field="${rAttributes.pakietyWyzywien}"
+                       type="radio"
+                       placeholder="Wybierz pakiet"/>
+                <label
+                        th:text="${'Cena dzień: ' + w.cena_dzien + ' Typ: ' + w.typ}"
+                        class="form-check-label" for="${'pakiety_wyzywien' + w.id_pakietu}">
+                </label>
+            </div>
+        </div>
+
+        <div class="form-group mt-4">
+            <label class="form-label">Usługi:</label>
+            <div class="form-check" th:each="u : ${uAttributes}">
+                <input id="${'uslugi' + u.id_uslugi}"
+                       class="form-check-input"
+                       th:name="pakiety_wyzywien"
+                       th:value="${u.id_uslugi}"
+                       th:field="${rAttributes.uslugi}"
+                       type="checkbox"
+                       placeholder="Wybierz pakiet"/>
+                <label
+                        th:text="${'Cena: ' + u.cena + ' Nazwa: ' + u.nazwa}"
+                        class="form-check-label" for="${'uslugi' + u.id_uslugi}">
+                </label>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-between align-items-center mt-4">
+            <input type="reset" class="btn btn-dark mt-2 col-md-5" value="Reset"/>
+            <input type="submit" class="btn btn-dark mt-2 col-md-5" value="Zapisz"/>
+        </div>
+
+    </form>
+</div>
+
+</body>
+</html>

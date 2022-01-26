@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Wyżywienie</title>
+    <link rel="icon" type="image/x-icon" th:href="@{/img/logo.png}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css"/>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+
+    <script type="text/javascript" th:src="@{/js/file.js}"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/file.css}"/>
+
+</head>
+<body>
+
+<div sec:authorize="hasAuthority('WLASCICIEL')">
+    <nav th:replace="fragments/navbar :: navbar"></nav>
+</div>
+
+<div sec:authorize="hasAuthority('PRACOWNIK')">
+    <nav th:replace="fragments/navbarPracownik :: navbarPracownik"></nav>
+</div>
+<div style="margin-top:80px">
+    <div th:replace="fragments/wyzywienieList :: wyzList(pAttributes=${pAttributes})"></div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Dodaj typ pokoju</title>
+    <link rel="icon" type="image/x-icon" th:href="@{/img/logo.png}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css"/>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+
+    <script type="text/javascript" th:src="@{/js/file.js}"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/file.css}"/>
+
+</head>
+<body>
+
+<div sec:authorize="hasAuthority('WLASCICIEL')">
+    <nav th:replace="fragments/navbar :: navbar"></nav>
+</div>
+
+<div sec:authorize="hasAuthority('PRACOWNIK')">
+    <nav th:replace="fragments/navbarPracownik :: navbarPracownik"></nav>
+</div>
+
+<div class="container-md" style="margin-top:80px; margin-bottom: 50px">
+
+    <img class="rounded mx-auto d-block" th:src="@{/img/logo.png}" width="150" height="150">
+
+    <h1 th:text="${formTitle}" class="text-center"></h1>
+
+    <form id="html5Form"
+          method="post"
+          th:action="@{/typyPokojow/dodaj}"
+          class="w-50 mx-auto was-validated">
+
+        <div class="form-group mt-4">
+            <label for="standard" class="form-label">Standard:</label>
+            <input id = "standard"
+                   class="form-control"
+                   th:name="standard"
+                   th:value="${typyPokojowAttributes.standard}"
+                   type="text"
+                   maxlength="20"
+                   minlength="3"
+                   placeholder="Wprowadź standard typu pokoju"
+                   required />
+
+            <div class="valid-feedback">Zweryfikowano</div>
+            <div class="invalid-feedback">Pole wymagane! </div>
+        </div>
+
+        <div class="form-group mt-4">
+            <label for="czy_klima" class="form-label">Czy w pokoju znajduje się klimatyzacja:</label>
+            <select id="czy_klima"
+                   class="form-select"
+                   th:name="czy_klima"
+                   th:value="${typyPokojowAttributes.czy_klima}"
+                   placeholder="Wprowadź informację o klimatyzacji"
+                   required>
+                <option>true</option>
+                <option>false</option>
+            </select>
+
+            <div class="valid-feedback">Zweryfikowano</div>
+            <div class="invalid-feedback">Pole wymagane!</div>
+        </div>
+
+        <div class="form-group mt-4">
+            <label for="czy_balkon" class="form-label">Czy w pokoju znajduje się balkon:</label>
+            <select id="czy_balkon"
+                   class="form-select"
+                   th:name="czy_balkon"
+                   th:value="${typyPokojowAttributes.czy_balkon}"
+                   required>
+                <option>true</option>
+                <option>false</option>
+            </select>
+
+            <div class="valid-feedback">Zweryfikowano</div>
+            <div class="invalid-feedback">Pole wymagane!</div>
+        </div>
+
+        <div class="form-group mt-4">
+            <label for="czy_kuchnia" class="form-label">Czy w pokoju znajduje się kuchnia:</label>
+            <select id="czy_kuchnia"
+                   class="form-select"
+                   th:name="czy_kuchnia"
+                   th:value="${typyPokojowAttributes.czy_kuchnia}"
+                   required>
+                <option>true</option>
+                <option>false</option>
+            </select>
+
+            <div class="valid-feedback">Zweryfikowano</div>
+            <div class="invalid-feedback">Pole wymagane!</div>
+        </div>
+
+
+        <div class="d-flex justify-content-between align-items-center mt-4">
+            <input type="reset" class="btn btn-dark mt-2 col-md-5" value="Reset"/>
+            <input type="submit" class="btn btn-dark mt-2 col-md-5" value="Zapisz"/>
+        </div>
+
+    </form>
+</div>
+
+</body>
+</html>
