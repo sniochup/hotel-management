@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Lista rezerwacji</title>
@@ -31,6 +31,7 @@
             <th>Status płatności</th>
             <th>Login klienta</th>
             <th>Więcej</th>
+            <th sec:authorize="hasAnyAuthority('PRACOWNIK', 'WLASCICIEL')">Edytuj</th>
         </tr>
         </thead>
 
@@ -63,8 +64,10 @@
                         <h3 class="text-center">Zarezerwowane Usługi</h3>
                         <div th:replace="fragments/uslugiList :: uList(uAttributes=${r.getUslugi()})"></div>
 
-                        <div class="d-flex justify-content-center align-items-center mt-4">
-                            <button class="btn btn-warning mt-2 col-md-3 disabled" type="button">Edytuj</button>
+                        <div sec:authorize="hasAnyAuthority('PRACOWNIK', 'WLASCICIEL')"
+                                class="d-flex justify-content-center align-items-center mt-4">
+                            <a class="btn btn-warning mt-2 col-md-3" type="button"
+                               th:href="@{'/rezerwacje/edit/' + ${r.id_rezerwacji}}">Edytuj</a>
                         </div>
 
                     </div>
@@ -73,6 +76,11 @@
                 <button type="button" class="btn btn-outline-primary" data-bs-toggle="offcanvas"
                         th:data-bs-target="${'#info' + r.id_rezerwacji}">Info
                 </button>
+
+            <td sec:authorize="hasAnyAuthority('PRACOWNIK', 'WLASCICIEL')">
+                <a type="button" class="btn btn-outline-warning"
+                   th:href="@{'/rezerwacje/edit/' + ${r.id_rezerwacji}}">Edytuj</a>
+            </td>
 
             </td>
         </tr>

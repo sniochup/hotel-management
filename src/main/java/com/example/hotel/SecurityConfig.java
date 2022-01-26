@@ -61,6 +61,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/rezerwacje/dodaj").hasAuthority("KLIENT")
+                .antMatchers("/rezerwacje/edit/**").hasAnyAuthority("WLASCICIEL", "PRACOWNIK")
+                .antMatchers("/pracownicy/edit/**").hasAuthority("WLASCICIEL")
                 .antMatchers("/pracownicy/dodaj").hasAuthority("WLASCICIEL")
                 .antMatchers("/stanowiska/dodaj").hasAuthority("WLASCICIEL")
                 .antMatchers("/pokoje/**").hasAnyAuthority("WLASCICIEL", "PRACOWNIK")

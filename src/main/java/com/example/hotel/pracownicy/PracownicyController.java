@@ -1,8 +1,6 @@
 package com.example.hotel.pracownicy;
 
 
-import com.example.hotel.pokoje.Pokoje;
-import com.example.hotel.rezerwacje.RezerwacjeService;
 import com.example.hotel.stanowiska.StanowiskaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -10,22 +8,17 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
 import java.util.Objects;
 
 @Controller
 @RequestMapping(path = "/pracownicy")
 public class PracownicyController {
 
-    BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-
     private final PracownicyService pracownicyService;
     private final StanowiskaService stanowiskaService;
+    BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     @Autowired
     public PracownicyController(PracownicyService pracownicyService,
@@ -58,7 +51,7 @@ public class PracownicyController {
     public String addProgrammingLanguageSubmit(@ModelAttribute Pracownicy pracownicy) {
         try {
             pracownicy.setPassword(passwordEncoder.encode(pracownicy.getPassword()));
-            System.out.println(pracownicy.getCzy_zatrudniony());
+//            System.out.println(pracownicy.getCzy_zatrudniony());
             pracownicyService.addNewPracownik(pracownicy);
         } catch (DataIntegrityViolationException e) {
             return "redirect:/pracownicy/dodaj?login";
@@ -66,6 +59,26 @@ public class PracownicyController {
             return "redirect:/pracownicy/dodaj?placa";
         }
 
+        return "redirect:/pracownicy/wyswietl";
+    }
+
+
+    @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
+    public String getUpdateForm(@PathVariable(name = "id") Long id, Model model) {
+        model.addAttribute("pracownicyAttributes", pracownicyService.getById(id).get());
+        model.addAttribute("sAttributes", stanowiskaService.getStanowiska());
+        model.addAttribute("formTitle", "Edytowanie pracownika");
+        return "views/pracownicy_edit";
+    }
+
+    @RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
+    public String updateUser(@PathVariable(name = "id") Long id, @ModelAttribute Pracownicy pracownik) {
+        try {
+            pracownicyService.updatePracownik(id, pracownik.getPlaca_pod(), pracownik.getStanowisko(),
+                    pracownik.getCzy_zatrudniony());
+        } catch (IllegalStateException e) {
+            return "redirect:/pracownicy/edit/" + id + "?placa";
+        }
         return "redirect:/pracownicy/wyswietl";
     }
 
