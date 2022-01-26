@@ -6,6 +6,7 @@ import com.example.hotel.miejscaParkingowe.MiejscaParkingoweService;
 import com.example.hotel.pakietyWyzywien.PakietyWyzywienService;
 import com.example.hotel.pokoje.Pokoje;
 import com.example.hotel.pokoje.PokojeService;
+import com.example.hotel.pracownicy.Pracownicy;
 import com.example.hotel.rabaty.Rabaty;
 import com.example.hotel.uslugi.Uslugi;
 import com.example.hotel.uslugi.UslugiService;
@@ -13,10 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
@@ -116,6 +114,23 @@ public class RezerwacjeController {
         rezerwacje.setStatus_platnosci("Oczekuje płatności");
         rezerwacjeService.addNewRezerwacja(rezerwacje);
 
+        return "redirect:/rezerwacje/wyswietl";
+    }
+
+    @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
+    public String getUpdateForm(@PathVariable(name="id") Long id, Model model) {
+        model.addAttribute("rAttributes", rezerwacjeService.getById(id).get());
+        model.addAttribute("pAttributes", pokojeService.getPokoje());
+        model.addAttribute("mAttributes", miejscaParkingoweService.getMiejscaParkingowe());
+        model.addAttribute("wAttributes", pakietyWyzywienService.getPakietyWyzywien());
+        model.addAttribute("uAttributes", uslugiService.getUslugi());
+        model.addAttribute("formTitle", "Edytowanie rezerwacji");
+        return "views/rezerwacje_edit";
+    }
+
+    @RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
+    public String updateRezerwacja(@PathVariable(name="id") Long id, @ModelAttribute Rezerwacje rezerwacja) {
+        rezerwacjeService.updateRezerwacja(id, rezerwacja.getStatus(), rezerwacja.getStatus_platnosci());
         return "redirect:/rezerwacje/wyswietl";
     }
 }

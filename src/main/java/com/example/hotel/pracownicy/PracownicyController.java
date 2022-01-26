@@ -10,13 +10,11 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.Objects;
+import java.util.Optional;
 
 @Controller
 @RequestMapping(path = "/pracownicy")
@@ -66,6 +64,22 @@ public class PracownicyController {
             return "redirect:/pracownicy/dodaj?placa";
         }
 
+        return "redirect:/pracownicy/wyswietl";
+    }
+
+
+    @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
+    public String getUpdateForm(@PathVariable(name="id") Long id, Model model) {
+        model.addAttribute("pracownicyAttributes", pracownicyService.getById(id).get());
+        model.addAttribute("sAttributes", stanowiskaService.getStanowiska());
+        model.addAttribute("formTitle", "Edytowanie pracownika");
+        return "views/pracownicy_edit";
+    }
+
+    @RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
+    public String updateUser(@PathVariable(name="id") Long id, @ModelAttribute Pracownicy pracownik) {
+        pracownicyService.updatePracownik(id, pracownik.getPlaca_pod(), pracownik.getStanowisko(),
+                pracownik.getCzy_zatrudniony());
         return "redirect:/pracownicy/wyswietl";
     }
 

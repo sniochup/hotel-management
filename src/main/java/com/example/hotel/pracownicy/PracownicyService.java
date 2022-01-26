@@ -1,5 +1,6 @@
 package com.example.hotel.pracownicy;
 
+import com.example.hotel.klienci.Klienci;
 import com.example.hotel.klienci.KlientRepository;
 import com.example.hotel.stanowiska.Stanowiska;
 import com.example.hotel.stanowiska.StanowiskaRepository;
@@ -10,8 +11,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.lang.reflect.InvocationTargetException;
+import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 
@@ -33,6 +35,10 @@ public class PracownicyService implements UserDetailsService {
 
     public Pracownicy authenticate(String login, String password) {
         return pracownicyRepository.findByLoginAndPassword(login, password).orElse(null);
+    }
+
+    public Optional<Pracownicy> getById(Long id) {
+        return pracownicyRepository.findById(id);
     }
 
     @Override
@@ -66,5 +72,25 @@ public class PracownicyService implements UserDetailsService {
 
     public Optional<Pracownicy> getPracownicyByLogin(String login) {
         return pracownicyRepository.findByLogin(login);
+    }
+
+    @Transactional
+    public void updatePracownik(Long id_pracownika, Float placa_pod, Stanowiska stanowisko, Boolean czy_zatrudniony) {
+        Pracownicy pracownik = pracownicyRepository.findById(id_pracownika)
+                .orElseThrow(() -> new IllegalStateException(
+                        "pracownik with id " + id_pracownika + " does not exists"));
+
+        if (placa_pod != null &&
+                !Objects.equals(pracownik.getPlaca_pod(), placa_pod)) {
+            pracownik.setPlaca_pod(placa_pod);
+        }
+        if (stanowisko != null &&
+                !Objects.equals(pracownik.getStanowisko(), stanowisko)) {
+            pracownik.setStanowisko(stanowisko);
+        }
+        if (czy_zatrudniony != null &&
+                !Objects.equals(pracownik.getCzy_zatrudniony(), czy_zatrudniony)) {
+            pracownik.setCzy_zatrudniony(czy_zatrudniony);
+        }
     }
 }

@@ -32,6 +32,7 @@
             <th>Płaca podstawowa</th>
             <th>Czy zatrudniony</th>
             <th>Nazwa stanowiska</th>
+            <th>Edytuj</th>
         </tr>
         </thead>
 
@@ -45,6 +46,9 @@
             <td th:text="${p.placa_pod}">Płaca podstawowa</td>
             <td th:text="${p.czy_zatrudniony}">Czy zatrudniony</td>
             <td th:text="${p.getStanowisko().getNazwa()}">Nazwa stanowiska</td>
+            <td>
+                <a th:href="@{'/pracownicy/edit/' + ${p.id_pracownika}}">Edytuj</a>
+            </td>
         </tr>
         </tbody>
 

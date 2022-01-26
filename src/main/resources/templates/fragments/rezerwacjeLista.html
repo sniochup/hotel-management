@@ -31,6 +31,7 @@
             <th>Status płatności</th>
             <th>Login klienta</th>
             <th>Więcej</th>
+            <th>Edytuj</th>
         </tr>
         </thead>
 
@@ -73,6 +74,9 @@
                 <button type="button" class="btn btn-outline-primary" data-bs-toggle="offcanvas"
                         th:data-bs-target="${'#info' + r.id_rezerwacji}">Info
                 </button>
+            <td>
+                <a th:href="@{'/rezerwacje/edit/' + ${r.id_rezerwacji}}">Edytuj</a>
+            </td>
 
             </td>
         </tr>

@@ -3,14 +3,19 @@ package com.example.hotel.rezerwacje;
 import com.example.hotel.klienci.Klienci;
 import com.example.hotel.klienci.KlientRepository;
 import com.example.hotel.pokoje.Pokoje;
+import com.example.hotel.pracownicy.Pracownicy;
 import com.example.hotel.rabaty.Rabaty;
 import com.example.hotel.rabaty.RabatyService;
+import com.example.hotel.stanowiska.Stanowiska;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class RezerwacjeService {
@@ -23,6 +28,10 @@ public class RezerwacjeService {
                              RabatyService rabatyService) {
         this.rezerwacjeRepository = rezerwacjeRepository;
         this.rabatyService = rabatyService;
+    }
+
+    public Optional<Rezerwacje> getById(Long id) {
+        return rezerwacjeRepository.findById(id);
     }
 
     public void addNewRezerwacja(Rezerwacje rezerwacje) {
@@ -52,5 +61,22 @@ public class RezerwacjeService {
         else {
             return rabatyService.getRabatyId(1L).get();
         }
+    }
+
+    @Transactional
+    public void updateRezerwacja(Long id, String status_rezerwacji, String status_platnosci) {
+        Rezerwacje rezerwacja = rezerwacjeRepository.findById(id)
+                .orElseThrow(() -> new IllegalStateException(
+                        "rezerwacja with id " + id + " does not exists"));
+
+        if (status_rezerwacji != null &&
+                !Objects.equals(rezerwacja.getStatus(), status_rezerwacji)) {
+            rezerwacja.setStatus(status_rezerwacji);
+        }
+        if (status_platnosci != null &&
+                !Objects.equals(rezerwacja.getStatus_platnosci(), status_platnosci)) {
+            rezerwacja.setStatus_platnosci(status_platnosci);
+        }
+
     }
 }
