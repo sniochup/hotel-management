@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:sec="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Nowa rezerwacja</title>
@@ -35,12 +35,11 @@
             <input id="data_od"
                    class="form-control"
                    th:name="data_od"
-                   th:value="${rAttributes.data_od}"
+                   th:value="${#temporals.format(poczatek, 'yyyy-MM-dd')}"
                    type="date"
-                   max="3000-31-12"
-                   min="1900-01-01"
                    placeholder="Wprowadź date początku"
-                   required/>
+                   readonly/>
+
             <div class="valid-feedback">Zweryfikowano</div>
             <div class="invalid-feedback">Pole wymagane!</div>
         </div>
@@ -48,14 +47,13 @@
         <div class="form-group mt-4 date">
             <label for="data_do" class="form-label">Data Końca:</label>
             <input id="data_do"
-                   class="form-control"
+                   class="form-control disabled"
                    th:name="data_do"
-                   th:value="${rAttributes.data_do}"
+                   th:value="${#temporals.format(koniec, 'yyyy-MM-dd')}"
                    type="date"
-                   max="3000-31-12"
-                   min="1900-01-01"
                    placeholder="Wprowadź date końca"
-                   required/>
+                   readonly/>
+
             <div class="valid-feedback">Zweryfikowano</div>
             <div class="invalid-feedback">Pole wymagane!</div>
         </div>
@@ -101,8 +99,8 @@
                        type="radio"
                        placeholder="Wybierz pakiet"/>
                 <label
-                       th:text="${'Cena dzień: ' + w.cena_dzien + ' Typ: ' + w.typ}"
-                       class="form-check-label" for="${'pakiety_wyzywien' + w.id_pakietu}">
+                        th:text="${'Cena dzień: ' + w.cena_dzien + ' Typ: ' + w.typ}"
+                        class="form-check-label" for="${'pakiety_wyzywien' + w.id_pakietu}">
                 </label>
             </div>
         </div>

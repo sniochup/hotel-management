@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 
@@ -47,7 +48,7 @@ public class PracownicyService implements UserDetailsService {
 
         Stanowiska stanowiska = stanowiskaRepository.getById(pracownicy.getStanowisko().getNazwa());
 
-        if (klientRepository.findByLogin(pracownicy.getLogin()).isPresent() || pracownicyRepository.findByLogin(pracownicy.getLogin()).isPresent()) {
+        if (klientRepository.findByLogin(pracownicy.getLogin()).isPresent() || pracownicyRepository.findByLogin(pracownicy.getLogin()).isPresent() || Objects.equals(pracownicy.getLogin(), "admin")) {
             throw new DataIntegrityViolationException("Login exist!");
         }
         else if (pracownicy.getPlaca_pod() < stanowiska.getPlaca_min() || pracownicy.getPlaca_pod() > stanowiska.getPlaca_max()){

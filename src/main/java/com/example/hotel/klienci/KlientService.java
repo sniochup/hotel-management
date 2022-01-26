@@ -57,7 +57,7 @@ public class KlientService implements UserDetailsService {
         if (Period.between(localDate, LocalDate.now()).getYears() < 18) {
             throw new IllegalStateException("Klient too young!");
         }
-        else if (klientRepository.findByLogin(klient.getLogin()).isPresent() || pracownicyRepository.findByLogin(klient.getLogin()).isPresent()) {
+        else if (klientRepository.findByLogin(klient.getLogin()).isPresent() || pracownicyRepository.findByLogin(klient.getLogin()).isPresent() || Objects.equals(klient.getLogin(), "admin")) {
             throw new DataIntegrityViolationException("Login exist!");
         }
         klientRepository.save(klient);

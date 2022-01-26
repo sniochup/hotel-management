@@ -75,8 +75,8 @@ INSERT INTO Uslugi (id_uslugi, nazwa, cena) VALUES (nextval('uslugi_sequence'), 
 -- Rezerwacja
 INSERT INTO Rezerwacje(id_rezerwacji, data_od, data_do, status, status_platnosci, id_klienta, id_pakietu) VALUES (nextval('rezerwacje_sequence'), TO_DATE('12-12-2022', 'DD-MM-YYYY'), TO_DATE('20-12-2022', 'DD-MM-YYYY'), 'Przyjeta', 'Oczekuje płatności', 1, 1);
 INSERT INTO Rezerwacje(id_rezerwacji, data_od, data_do, status, status_platnosci, id_klienta, id_pakietu) VALUES (nextval('rezerwacje_sequence'), TO_DATE('01-01-2021', 'DD-MM-YYYY'), TO_DATE('05-01-2021', 'DD-MM-YYYY'), 'Odwolana', 'Oczekuje płatności', 2, 1);
-INSERT INTO Rezerwacje(id_rezerwacji, data_od, data_do, status, status_platnosci, id_klienta, id_pakietu) VALUES (nextval('rezerwacje_sequence'), TO_DATE('02-02-2020', 'DD-MM-YYYY'), TO_DATE('06-02-2020', 'DD-MM-YYYY'), 'Przyjeta', 'Oplacona', 1, 2);
-INSERT INTO Rezerwacje(id_rezerwacji, data_od, data_do, status, status_platnosci, id_klienta, id_pakietu) VALUES (nextval('rezerwacje_sequence'), TO_DATE('03-03-2019', 'DD-MM-YYYY'), TO_DATE('08-03-2019', 'DD-MM-YYYY'), 'Zamknieta', 'Oplacona', 2, 2);
+INSERT INTO Rezerwacje(id_rezerwacji, data_od, data_do, status, status_platnosci, id_klienta, id_pakietu) VALUES (nextval('rezerwacje_sequence'), TO_DATE('01-03-2022', 'DD-MM-YYYY'), TO_DATE('05-03-2022', 'DD-MM-YYYY'), 'Przyjeta', 'Oplacona', 1, 2);
+INSERT INTO Rezerwacje(id_rezerwacji, data_od, data_do, status, status_platnosci, id_klienta, id_pakietu) VALUES (nextval('rezerwacje_sequence'), TO_DATE('10-03-2022', 'DD-MM-YYYY'), TO_DATE('15-03-2022', 'DD-MM-YYYY'), 'Zamknieta', 'Oplacona', 1, 2);
 
 -- Zarezerwowane pokoje
 INSERT INTO Zarezerwowane_pokoje (id_pokoju, id_rezerwacji) VALUES (1, 1);

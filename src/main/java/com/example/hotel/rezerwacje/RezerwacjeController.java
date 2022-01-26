@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Controller
@@ -65,16 +67,65 @@ public class RezerwacjeController {
     public String getRejestracja(Model model, Authentication authentication) {
 
         model.addAttribute("rAttributes", new Rezerwacje());
-        model.addAttribute("pAttributes", pokojeService.getPokoje());
-        model.addAttribute("mAttributes", miejscaParkingoweService.getMiejscaParkingowe());
+        model.addAttribute("localDate", LocalDate.now());
+        model.addAttribute("featureDate", LocalDate.now().plusYears(3));
+        model.addAttribute("formTitle", "Nowa Rezerwacja");
+
+        return "views/rezerwacje_addData";
+    }
+
+    @PostMapping(path = "/dodaj-rezerwacja")
+    public String getRejestracjaCala(@ModelAttribute Rezerwacje rezerwacje, Model model) {
+
+        LocalDate start = (rezerwacje.getData_od()).toLocalDate();
+        LocalDate end = (rezerwacje.getData_do()).toLocalDate();
+
+        if (ChronoUnit.DAYS.between(start, end) < 1) {
+            return "redirect:/rezerwacje/dodaj?data";
+        }
+
+        ArrayList<Pokoje> z_pokoje = new ArrayList<Pokoje>();
+        ArrayList<MiejscaParkingowe> z_parking = new ArrayList<MiejscaParkingowe>();
+
+        for (Rezerwacje r : rezerwacjeService.getRezerwacje()) {
+            LocalDate rs = (r.getData_od()).toLocalDate().plusDays(1);
+            LocalDate re = (r.getData_do()).toLocalDate().minusDays(1);
+            if (!re.isBefore(start) && !rs.isAfter(end)) {
+                z_pokoje.addAll(r.getPokoje());
+                z_parking.addAll(r.getMiejsca_parkingowe());
+            }
+        }
+
+        List<Pokoje> pokoje_dost = pokojeService.getPokoje();
+        for (Pokoje p : z_pokoje) {
+            pokoje_dost.removeIf(d -> Objects.equals(p.getId_pokoju(), d.getId_pokoju()));
+        }
+
+        if (pokoje_dost.isEmpty()) {
+            return "redirect:/rezerwacje/dodaj?brak";
+        }
+
+        List<MiejscaParkingowe> parking_dost = miejscaParkingoweService.getMiejscaParkingowe();
+        for (MiejscaParkingowe p : z_parking) {
+            parking_dost.removeIf(d -> Objects.equals(p.getId_miejsca(), d.getId_miejsca()));
+        }
+
+        model.addAttribute("pAttributes", pokoje_dost);
+        model.addAttribute("mAttributes", parking_dost);
+
+        model.addAttribute("rAttributes", new Rezerwacje());
         model.addAttribute("wAttributes", pakietyWyzywienService.getPakietyWyzywien());
         model.addAttribute("uAttributes", uslugiService.getUslugi());
+        model.addAttribute("poczatek", start);
+        model.addAttribute("koniec", end);
+
         model.addAttribute("formTitle", "Nowa Rezerwacja");
         return "views/rezerwacje_add";
     }
 
     @PostMapping(path = "/dodaj")
     public String addProgrammingLanguageSubmit(@ModelAttribute Rezerwacje rezerwacje, Authentication authentication) {
+        System.out.println(rezerwacje);
 
         LocalDate start = (rezerwacje.getData_od()).toLocalDate();
         LocalDate end = (rezerwacje.getData_do()).toLocalDate();
