@@ -16,8 +16,16 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/file.css}"/>
 
 </head>
-<body style="background-color: #F4EFEF;">
-<nav th:replace="fragments/navbar :: navbar"></nav>
+<body>
+
+
+<div sec:authorize="hasAuthority('WLASCICIEL')">
+    <nav th:replace="fragments/navbar :: navbar"></nav>
+</div>
+
+<div sec:authorize="hasAuthority('PRACOWNIK')">
+    <nav th:replace="fragments/navbarPracownik :: navbarPracownik"></nav>
+</div>
 
 <div class="container-md" style="margin-top:80px; margin-bottom: 50px">
 
