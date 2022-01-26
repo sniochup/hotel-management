@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:sec="http://www.thymeleaf.org">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Edycja pracownika</title>
@@ -16,7 +16,7 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/file.css}"/>
 
 </head>
-<body style="background-color: #F4EFEF;">
+<body>
 <nav th:replace="fragments/navbar :: navbar"></nav>
 
 <div class="container-md" style="margin-top:80px; margin-bottom: 50px">
@@ -64,7 +64,7 @@
 
         <div class="form-group mt-4">
             <label for="data_zatrudnienia" class="form-label">Data zatrudnienia pracownika:</label>
-            <input id = "data_zatrudnienia"
+            <input id="data_zatrudnienia"
                    class="form-select"
                    th:name="data_zatrudnienia"
                    th:value="${pracownicyAttributes.data_zatrudnienia}"
@@ -75,12 +75,12 @@
                    readonly/>
 
             <div class="valid-feedback">Zweryfikowano</div>
-            <div class="invalid-feedback">Pole wymagane! </div>
+            <div class="invalid-feedback">Pole wymagane!</div>
         </div>
 
         <div class="form-group mt-4">
             <label for="placa_pod" class="form-label">Płaca podstawowa pracownika:</label>
-            <input id = "placa_pod"
+            <input id="placa_pod"
                    class="form-select"
                    th:name="placa_pod"
                    th:value="${pracownicyAttributes.placa_pod}"
@@ -92,7 +92,7 @@
                    required/>
 
             <div class="valid-feedback">Zweryfikowano</div>
-            <div class="invalid-feedback">Pole wymagane! </div>
+            <div class="invalid-feedback">Pole wymagane!</div>
         </div>
 
         <div class="form-group mt-4">
@@ -142,26 +142,8 @@
                    readonly/>
 
             <div class="valid-feedback">Zweryfikowano</div>
-            <div class="invalid-feedback">Pole wymagane! </div>
-        </div>
-
-        <div class="form-group mt-4">
-            <label for="password" class="form-label">Hasło pracownika:</label>
-            <input id="password"
-                   class="form-control"
-                   th:name="password"
-                   th:value="${pracownicyAttributes.password}"
-                   type="password"
-                   placeholder="Wprowadź hasło"
-                   maxlength="20"
-                   minlength="4"
-                   readonly/>
-
-            <div class="valid-feedback">Zweryfikowano</div>
             <div class="invalid-feedback">Pole wymagane!</div>
         </div>
-
-
 
         <div class="d-flex justify-content-between align-items-center mt-4">
             <input type="reset" class="btn btn-dark mt-2 col-md-5" value="Reset"/>

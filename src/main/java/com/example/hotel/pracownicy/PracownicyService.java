@@ -75,7 +75,15 @@ public class PracownicyService implements UserDetailsService {
     }
 
     @Transactional
-    public void updatePracownik(Long id_pracownika, Float placa_pod, Stanowiska stanowisko, Boolean czy_zatrudniony) {
+    public void updatePracownik(Long id_pracownika, Float placa_pod, Stanowiska stanowiska, Boolean czy_zatrudniony) {
+
+        if (placa_pod < stanowiska.getPlaca_min() || placa_pod > stanowiska.getPlaca_max()){
+            throw new IllegalStateException(String.format("Placa na stanowisku %s wynosi (min: %s, max: %s)",
+                    stanowiska.getNazwa(),
+                    stanowiska.getPlaca_min(),
+                    stanowiska.getPlaca_max()));
+        }
+
         Pracownicy pracownik = pracownicyRepository.findById(id_pracownika)
                 .orElseThrow(() -> new IllegalStateException(
                         "pracownik with id " + id_pracownika + " does not exists"));
@@ -84,9 +92,9 @@ public class PracownicyService implements UserDetailsService {
                 !Objects.equals(pracownik.getPlaca_pod(), placa_pod)) {
             pracownik.setPlaca_pod(placa_pod);
         }
-        if (stanowisko != null &&
-                !Objects.equals(pracownik.getStanowisko(), stanowisko)) {
-            pracownik.setStanowisko(stanowisko);
+        if (stanowiska != null &&
+                !Objects.equals(pracownik.getStanowisko(), stanowiska)) {
+            pracownik.setStanowisko(stanowiska);
         }
         if (czy_zatrudniony != null &&
                 !Objects.equals(pracownik.getCzy_zatrudniony(), czy_zatrudniony)) {
