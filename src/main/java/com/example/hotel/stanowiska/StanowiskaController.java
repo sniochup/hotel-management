@@ -1,14 +1,12 @@
 package com.example.hotel.stanowiska;
 
 import com.example.hotel.rabaty.RabatyService;
+import com.example.hotel.rezerwacje.Rezerwacje;
 import com.example.hotel.uslugi.Uslugi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping(path = "/stanowiska")
@@ -37,6 +35,12 @@ public class StanowiskaController {
     @PostMapping(path = "/dodaj")
     public String addProgrammingLanguageSubmit(@ModelAttribute Stanowiska stanowiska) {
         stanowiskaService.addNewStanowiska(stanowiska);
+        return "redirect:/stanowiska/wyswietl";
+    }
+
+    @RequestMapping(value = "/usun/{nazwa}", method = RequestMethod.GET)
+    public String deleteStanowiska(@PathVariable(name="nazwa") String nazwa, @ModelAttribute Stanowiska stanowiska) {
+        stanowiskaService.deleteStanowiska(stanowiska);
         return "redirect:/stanowiska/wyswietl";
     }
 }

@@ -33,6 +33,7 @@
             <th>Nazwa</th>
             <th>Płaca minimalna</th>
             <th>Płaca maksymalna</th>
+            <th sec:authorize="hasAnyAuthority('WLASCICIEL')">Usuń</th>
         </tr>
         </thead>
 
@@ -41,6 +42,11 @@
             <td th:text="${s.nazwa}">Nazwa</td>
             <td th:text="${s.placa_min}">Płaca minimalna</td>
             <td th:text="${s.placa_max}">Płaca maksymalna</td>
+
+            <td sec:authorize="hasAnyAuthority('WLASCICIEL')">
+                <a type="button" class="btn btn-outline-warning"
+                   th:href="@{'/stanowiska/usun/' + ${s.nazwa}}">Usuń</a>
+            </td>
         </tr>
         </tbody>
 
