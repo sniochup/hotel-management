@@ -1,7 +1,5 @@
 package com.example.hotel.rezerwacje;
 
-import com.example.hotel.klienci.Klienci;
-import com.example.hotel.pokoje.Pokoje;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

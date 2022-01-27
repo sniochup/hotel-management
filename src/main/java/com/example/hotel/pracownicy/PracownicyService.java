@@ -56,12 +56,18 @@ public class PracownicyService implements UserDetailsService {
         if (klientRepository.findByLogin(pracownicy.getLogin()).isPresent() || pracownicyRepository.findByLogin(pracownicy.getLogin()).isPresent() || Objects.equals(pracownicy.getLogin(), "admin")) {
             throw new DataIntegrityViolationException("Login exist!");
         }
-        else if (pracownicy.getPlaca_pod() < stanowiska.getPlaca_min() || pracownicy.getPlaca_pod() > stanowiska.getPlaca_max()){
+        else if (!pracownicyRepository.czyPensjaZakresie(pracownicy.getPlaca_pod(), pracownicy.getStanowisko().getNazwa())){
             throw new IllegalStateException(String.format("Placa na stanowisku %s wynosi (min: %s, max: %s)",
                     pracownicy.getStanowisko().getNazwa(),
                     stanowiska.getPlaca_min(),
                     stanowiska.getPlaca_max()));
         }
+//        else if (pracownicy.getPlaca_pod() < stanowiska.getPlaca_min() || pracownicy.getPlaca_pod() > stanowiska.getPlaca_max()){
+//            throw new IllegalStateException(String.format("Placa na stanowisku %s wynosi (min: %s, max: %s)",
+//                    pracownicy.getStanowisko().getNazwa(),
+//                    stanowiska.getPlaca_min(),
+//                    stanowiska.getPlaca_max()));
+//        }
 
         pracownicyRepository.save(pracownicy);
     }

@@ -130,8 +130,6 @@ public class Rezerwacje {
         this.status_platnosci = status_platnosci;
     }
 
-
-
     @Override
     public String toString() {
         return "Rezerwacje{" +
