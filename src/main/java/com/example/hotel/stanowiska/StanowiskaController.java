@@ -1,8 +1,5 @@
 package com.example.hotel.stanowiska;
 
-import com.example.hotel.rabaty.RabatyService;
-import com.example.hotel.rezerwacje.Rezerwacje;
-import com.example.hotel.uslugi.Uslugi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -40,7 +37,12 @@ public class StanowiskaController {
 
     @RequestMapping(value = "/usun/{nazwa}", method = RequestMethod.GET)
     public String deleteStanowiska(@PathVariable(name="nazwa") String nazwa, @ModelAttribute Stanowiska stanowiska) {
-        stanowiskaService.deleteStanowiska(stanowiska);
+        try {
+            stanowiskaService.deleteStanowiska(stanowiska);
+        } catch (IllegalStateException e) {
+            return "redirect:/stanowiska/wyswietl?blad";
+        }
+
         return "redirect:/stanowiska/wyswietl";
     }
 }
