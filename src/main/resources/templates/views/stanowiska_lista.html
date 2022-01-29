@@ -49,7 +49,7 @@
             <td th:text="${s.placa_max}">Płaca maksymalna</td>
 
             <td sec:authorize="hasAnyAuthority('WLASCICIEL')">
-                <a type="button" class="btn btn-outline-warning"
+                <a type="button" class="btn btn-outline-danger"
                    th:href="@{'/stanowiska/usun/' + ${s.nazwa}}">Usuń</a>
             </td>
         </tr>
