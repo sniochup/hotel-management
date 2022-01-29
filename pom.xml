@@ -11,8 +11,8 @@
     </parent>
 
     <groupId>com.example</groupId>
-    <artifactId>hotel</artifactId>
-    <version>0.1.0-ALFA</version>
+    <artifactId>hotel-management</artifactId>
+    <version>1.0-BETA</version>
     <name>hotel</name>
     <description>hotel</description>
 
