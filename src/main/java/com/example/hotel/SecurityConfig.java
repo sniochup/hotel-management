@@ -29,7 +29,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.authenticationProvider(daoAuthenticationProvider())
+        auth
+                .authenticationProvider(daoAuthenticationProvider())
                 .authenticationProvider(daoAuthenticationProviderPrac())
                 .inMemoryAuthentication()
                 .withUser("admin")
